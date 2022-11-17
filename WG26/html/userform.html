@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Thông tin tài khoản</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="userform m-5">
+    <div class="container">
+        <div class="row gutters">
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 p-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="account-settings  ">
+                            <div class="user-profile mt-5">
+                                <div class="user-avatar ">
+                                    <img src="../pics/chicuong.jpg" alt="avatar"
+                                        class="img-thumbnail mx-auto d-block userimg">
+                                        <form>
+                                            <input type="file" id="myFile" name="filename">
+                                        </form>
+                                </div>
+                            </div>
+                            <div class="user-profile">
+                                <form>
+                                    <div>
+                                        <button type="submit" id="submit" name="submit"
+                                            class="btn btn-primary btn-lg ml-2  ">Thăng cấp</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="row">
+                                <img src="../pics/logo2.png" class="logouserform m-auto ">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <h6 class=" titleuserform">Thông tin tài khoản</h6>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="lastname">Họ lót : </label>
+                                    <input type="text" class="form-control" id="lastname" placeholder="Nhập họ của bạn">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="firstname">Tên : </label>
+                                    <input type="text" class="form-control" id="firstname"
+                                        placeholder="Nhập tên của bạn">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="email">Email : </label>
+                                    <input type="email" class="form-control" id="email"
+                                        placeholder="Nhập email của bạn">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="gender">Giới tính : </label>
+                                    <div class="gender">
+                                        <select name="GIOITINH" id="Gender" class="form-control">
+                                            <option value="Emp" disabled selected>Giới tính của bạn là ?</option>
+                                            <option label="Nam" value="Nam" name="GIOITINH">Nam</option>
+                                            <option label="Nữ" value="Nữ" name="GIOITINH">Nữ</option>
+                                            <option label="Khác" value="Khác" name="GIOITINH">Khác</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <h6 class="mt-3 mb-2 ">Thông tin cá nhân ( nếu có )</h6>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="birthday">Ngày sinh : </label>
+                                    <input type="date" class="form-control" id="ngaysinh">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="phonenumber">Số điện thoại : </label>
+                                    <input type="text" class="form-control" id="phonenumber"
+                                        placeholder="Nhập số điện thoại của bạn">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="money">Sồ tiền (VNĐ) :</label>
+                                    <input type="text" class="form-control" id="money">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="role">Role : </label>
+                                    <input type="text" class="form-control" id="role">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="text-right">
+                                   <a href="#" type="submit" name="cancel" id="submit" class="btn btn-primary">Quay lại trang chủ</a>
+                                    <a href="#" type="submit" name="changepass" class="btn btn-primary">Đổi mật khẩu</a>
+                                    <button type="submit" id="submit" name="submit" class="btn btn-primary">Cập nhật</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

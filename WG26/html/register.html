@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Đăng ký tài khoản</title>
+    <link rel="stylesheet" href="../css/style.css">
+
+
+<body>
+    <div class="container col-4 col-md-4 regisform">
+        <form method="POST" action="../handle/register1.php">
+            <div class="row">
+                <img src="../pics/logo2.png" class="logoreg m-auto p-2">
+            </div>
+
+            <div class="form-row mb-3">
+                <h3 class="m-auto">ĐĂNG KÝ TÀI KHOẢN</h3>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Họ" id="firstname" name='HO'>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Tên " id="lastname" name='TEN'>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-group">
+                        <div class="gender">
+                            <select name="GIOITINH" id="Gender" class="form-control">
+                                <option value="Emp" disabled selected>Giới tính của bạn là ?</option>
+                                <option label="Nam" value="Nam" name="GIOITINH">Nam</option>
+                                <option label="Nữ" value="Nữ" name="GIOITINH">Nữ</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Mật khẩu" id="pwd" name="MATKHAU">
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Nhập lại mật khẩu" id="pass"
+                            name="MATKHAU">
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Địa chỉ Email" id="email" name="EMAIL">
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-group">
+                        <input type="date" class="form-control" placeholder="Ngày sinh" id="birthday" name="NGAYSINH">
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-primary font-weight-bolder  w-50 ">Đăng ký</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    </div>
+
+</body>
+
+</html>
