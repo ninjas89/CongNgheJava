@@ -1,5 +1,6 @@
 package tdtu.edu.un.WG26.Model;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -8,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.springframework.data.annotation.CreatedDate;
 
 @Entity
 @Table(name="user")
@@ -23,8 +26,8 @@ public class User {
 	@Column(name = "first_name")
 	private String firstName;
 	
-	@Temporal(TemporalType.TIMESTAMP) 
-	@Column(name = "created_date", insertable = false, updatable = false)
+	@CreatedDate
+	@Column(name = "created_date", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date createdDate;
 	
 	@Column
