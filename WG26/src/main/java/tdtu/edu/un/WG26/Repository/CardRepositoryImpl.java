@@ -1,4 +1,4 @@
-package tdtu.edu.un.WG26.DAO;
+package tdtu.edu.un.WG26.Repository;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import tdtu.edu.un.WG26.Model.Card;
 
 @Repository
-public class CardDAOImplement implements CardDAO {
+public class CardRepositoryImpl implements CardRepository {
 
 	@Override
 	public List<Card> get() {

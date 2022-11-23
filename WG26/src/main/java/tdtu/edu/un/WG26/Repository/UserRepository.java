@@ -1,11 +1,11 @@
-package tdtu.edu.un.WG26.DAO;
+package tdtu.edu.un.WG26.Repository;
 
 import java.util.List;
 
 import tdtu.edu.un.WG26.Model.User;
 
 
-public interface UserDAO {
+public interface UserRepository {
 	
 	List<User> get();
 	

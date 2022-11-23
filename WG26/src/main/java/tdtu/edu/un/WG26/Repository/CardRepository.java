@@ -1,10 +1,10 @@
-package tdtu.edu.un.WG26.DAO;
+package tdtu.edu.un.WG26.Repository;
 
 import java.util.List;
 
 import tdtu.edu.un.WG26.Model.Card;
 
-public interface CardDAO {
+public interface CardRepository {
 	
 	List<Card> get();
 	

@@ -83,4 +83,5 @@ nb-configuration.xml
 ##############################
 .DS_Store
 
+# Own workspace setting for each user
 ./src/main/resources/application.properties
