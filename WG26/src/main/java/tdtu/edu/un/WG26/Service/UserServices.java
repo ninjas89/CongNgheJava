@@ -1,15 +1,9 @@
 package tdtu.edu.un.WG26.Service;
 
-import java.util.List;
-
 import tdtu.edu.un.WG26.Model.User;
+import tdtu.edu.un.WG26.web.dto.UserRegistrationDto;
 
 
 public interface UserServices {
-	
-	List<User> get();
-	
-	User get(String email);
-	
-	void save(User user);
+	User save(UserRegistrationDto registrationDto);
 }

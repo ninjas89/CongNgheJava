@@ -1,15 +1,10 @@
 package tdtu.edu.un.WG26.Repository;
 
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import tdtu.edu.un.WG26.Model.User;
 
 
-public interface UserRepository {
+public interface UserRepository extends JpaRepository<User, Long>{
 	
-	List<User> get();
-	
-	User get(String email);
-	
-	void save(User user);
 }

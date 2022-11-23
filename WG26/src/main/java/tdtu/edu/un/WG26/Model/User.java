@@ -15,7 +15,6 @@ import org.springframework.data.annotation.CreatedDate;
 @Entity
 @Table(name="user")
 public class User {
-	
 	@Id
 	@Column
 	private String email;
@@ -43,10 +42,23 @@ public class User {
 	private String role;
 	
 	@Column(name = "phone_number")
-	private String phonenNumber;
+	private String phoneNumber;
 	
+	public User() {
+		super();
+	}
+
 	@Column(name = "avatar_path")
 	private String avatarPath;
+
+	public User(String email, String lastName, String firstName, String gender, String password) {
+		super();
+		this.email = email;
+		this.lastName = lastName;
+		this.firstName = firstName;
+		this.gender = gender;
+		this.password = password;
+	}
 
 	public String getEmail() {
 		return email;
@@ -113,11 +125,11 @@ public class User {
 	}
 
 	public String getPhonenNumber() {
-		return phonenNumber;
+		return phoneNumber;
 	}
 
 	public void setPhonenNumber(String phonenNumber) {
-		this.phonenNumber = phonenNumber;
+		this.phoneNumber = phonenNumber;
 	}
 
 	public String getAvatarPath() {
@@ -132,7 +144,7 @@ public class User {
 	public String toString() {
 		return "User [email=" + email + ", lastName=" + lastName + ", firstName=" + firstName + ", createdDate="
 				+ createdDate + ", gender=" + gender + ", cashAmount=" + cashAmount + ", password=" + password
-				+ ", role=" + role + ", phonenNumber=" + phonenNumber + ", avatarPath=" + avatarPath + "]";
+				+ ", role=" + role + ", phonenNumber=" + phoneNumber + ", avatarPath=" + avatarPath + "]";
 	}
 
 }

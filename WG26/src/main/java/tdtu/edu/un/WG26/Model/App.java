@@ -23,7 +23,7 @@ public class App {
 	@Column
 	private Integer price;
 	
-	@Column(name = "purchase_tie")
+	@Column(name = "purchase_time")
 	private Integer purchaseTime;
 	
 	@Column(name = "download_time")
