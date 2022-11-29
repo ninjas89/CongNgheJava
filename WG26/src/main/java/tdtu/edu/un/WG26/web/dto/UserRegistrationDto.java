@@ -8,12 +8,11 @@ public class UserRegistrationDto {
 	private String password;
 	private String confirmPassword;
 	
-	public UserRegistrationDto(){
-		
+	public UserRegistrationDto() {
+		// TODO Auto-generated constructor stub
 	}
 	
-	public UserRegistrationDto(String firstName, String lastName, String gender, String email, 
-			String password, String confirmPassword) {
+	public UserRegistrationDto(String firstName, String lastName, String gender, String email, String password, String confirmPassword) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -22,6 +21,7 @@ public class UserRegistrationDto {
 		this.password = password;
 		this.confirmPassword = confirmPassword;
 	}
+
 
 	public String getGender() {
 		return gender;

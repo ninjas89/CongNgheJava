@@ -1,63 +1,90 @@
 package tdtu.edu.un.WG26.Model;
 
-import java.sql.Timestamp;
-import java.util.Date;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
 
-import org.springframework.data.annotation.CreatedDate;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 @Entity
 @Table(name="user")
 public class User {
 	@Id
 	@Column
+	@NotEmpty(message = "Vui lòng nhập email của bạn")
 	private String email;
 	
+	@NotEmpty(message = "Vui lòng nhập Họ")
 	@Column(name = "last_name")
 	private String lastName;
 	
+	@NotEmpty(message = "Vui lòng nhập Tên")
 	@Column(name = "first_name")
 	private String firstName;
 	
-	@CreatedDate
-	@Column(name = "created_date", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-	private Date createdDate;
+	@Column(name = "created_date")
+	private String createdDate;
 	
+	@NotEmpty(message = "Vui lòng chọn giới tính của bạn")
 	@Column
 	private String gender;
 	
 	@Column(name = "cash_amount") 
 	private Integer cashAmount;
 	
+	@NotEmpty(message = "Vui lòng nhập mật khẩu")
 	@Column
 	private String password;
-	
-	@Column
-	private String role;
 	
 	@Column(name = "phone_number")
 	private String phoneNumber;
 	
-	public User() {
-		super();
-	}
-
 	@Column(name = "avatar_path")
 	private String avatarPath;
 
-	public User(String email, String lastName, String firstName, String gender, String password) {
+	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@JoinTable(
+		name = "user_role",
+        joinColumns = { @JoinColumn(name = "user_email", referencedColumnName = "email") },
+        inverseJoinColumns = { @JoinColumn(name = "role_id", referencedColumnName = "id") }
+	)
+	private Role role;
+
+	public User() {
+		super();
+	}
+	
+	public User(String email, String lastName, String firstName,String createdDate, String gender, String password) {
 		super();
 		this.email = email;
 		this.lastName = lastName;
 		this.firstName = firstName;
+		this.createdDate = createdDate;
 		this.gender = gender;
 		this.password = password;
+	}
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 	public String getEmail() {
@@ -84,11 +111,11 @@ public class User {
 		this.firstName = firstName;
 	}
 
-	public Date getCreatedDate() {
+	public String getCreatedDate() {
 		return createdDate;
 	}
 
-	public void setCreatedDate(Date createdDate) {
+	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
 	}
 
@@ -116,13 +143,6 @@ public class User {
 		this.password = password;
 	}
 
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
 
 	public String getPhonenNumber() {
 		return phoneNumber;
@@ -144,7 +164,8 @@ public class User {
 	public String toString() {
 		return "User [email=" + email + ", lastName=" + lastName + ", firstName=" + firstName + ", createdDate="
 				+ createdDate + ", gender=" + gender + ", cashAmount=" + cashAmount + ", password=" + password
-				+ ", role=" + role + ", phonenNumber=" + phoneNumber + ", avatarPath=" + avatarPath + "]";
+				+ ", phonenNumber=" + phoneNumber + ", avatarPath=" + avatarPath + "]";
 	}
+
 
 }

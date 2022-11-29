@@ -15,8 +15,11 @@
 </head>
 
 <body>
+	<div th:if="${param.error}">
+    	<div class="alert alert-info">Invalid Your Email</div>
+    </div>
     <div class="container col-4 col-md-4  loginform">
-        <form method="POST" action="../handle/login1.php">
+        <form method="post" th:action="@{/login}" role="form">
             <div class="row">
                 <img src="/img/logo2.png" class="logoforget m-auto p-2">
             </div>
@@ -24,12 +27,12 @@
                 <h3 class="m-auto dn">ĐĂNG NHẬP</h3>
             </div>
             <div class="form-group">
-                <label for="user" class="font-weight-bolder lead">Tài khoản : </label>
-                <input type="text" class="form-control" placeholder="Tài khoản" id="user" name="EMAIL"required>
+                <label for="user" class="font-weight-bolder lead">Email : </label>
+                <input type="text" class="form-control" placeholder="Tài khoản" id="email"  name="email"  required>
             </div>
             <div class="form-group">
                 <label for="pwd" class="font-weight-bolder lead pass">Mật khẩu : </label>
-                <input type="password" class="form-control " placeholder="Mật khẩu" id="pwd" name="MATKHAUNHAP" required>
+                <input type="password" class="form-control " placeholder="Mật khẩu" id="password" name="password" required>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
@@ -42,20 +45,17 @@
             </div>
 
             <div class="form-group text-center font-weight-bolder">
-                <a href="forgetpass.html" class="m-auto">Quên mật khẩu</a>
+                <a href="" class="m-auto">Quên mật khẩu</a>
             </div>
 
             <div class="form-group text-center font-weight-bolder">
-                <a href="register.html">Đăng ký tài khoản</a>
+                <a th:href="@{/register}">Đăng ký tài khoản</a>
             </div>
 
             <div class="form-group text-center font-weight-bolder">
                 <a href="home.html" class="m-auto">Quay lại</a>
             </div>
-            
-
-    </div>
-    </form>
+    	</form>
     </div>
 
 </body>

@@ -10,7 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <title>Đăng ký tài khoản</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 
 
 <body>
@@ -20,7 +20,7 @@
     <div class="container col-4 col-md-4 regisform">
         <form method="POST" th:action="@{/register}" th:object="${user}">
             <div class="row">
-                <img src="./img/logo2.png" class="logoreg m-auto p-2">
+                <img src="/img/logo2.png" class="logoreg m-auto p-2">
             </div>
 
             <div class="form-row mb-3">
@@ -43,7 +43,7 @@
                     <div class="form-group">
                         <div class="gender">
                             <select class="form-control" id="Gender" th:field="*{gender}" required>
-                                <option value="Emp" disabled selected>Giới tính của bạn là ?</option>
+                                <option value="Emp" selected>Giới tính của bạn là ?</option>
                                 <option label="Nam" value="Nam" name="GIOITINH">Nam</option>
                                 <option label="Nữ" value="Nữ" name="GIOITINH">Nữ</option>
                             </select>
@@ -80,7 +80,7 @@
                 </div>
             </div>
             <div class="form-group text-center font-weight-bolder">
-                <a th:href="${login}" class="m-auto">Quay lại</a>
+                <a th:href="@{/login}" class="m-auto">Quay lại</a>
             </div>
         </form>
     </div>
