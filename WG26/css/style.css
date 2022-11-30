@@ -55,8 +55,8 @@ body{
 
  /*Phần này của home.html mới */
 .navbar {
-    margin-bottom: 50px;
     border-radius: 0;
+    margin-top: -10px;
 }
 .jumbotron {
     margin-bottom: 0;
