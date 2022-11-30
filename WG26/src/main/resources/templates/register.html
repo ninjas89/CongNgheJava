@@ -29,46 +29,51 @@
             <div class="form-row">
                 <div class="col">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Họ" id="firstName" th:field="*{firstName}" required>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Tên " id="lastname" th:field="*{lastName}" required>
+                        <input type="text" class="form-control" placeholder="Địa chỉ Email" id="email" th:field="*{email}">
+                        <p th:if="${#fields.hasErrors('email')}" th:each="err : ${#fields.errors('email')}" th:text="${err}"></p>
                     </div>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col">
                     <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Họ" id="firstName" th:field="*{firstName}" >
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Tên " id="lastname" th:field="*{lastName}" >
+                    </div>
+                </div>
+            </div>
+       		<p th:if="${#fields.hasErrors('firstName')} or ${#fields.hasErrors('lastName')}" th:errors="*{firstName}"></p>
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-group">
                         <div class="gender">
-                            <select class="form-control" id="Gender" th:field="*{gender}" required>
-                                <option value="Emp" selected>Giới tính của bạn là ?</option>
+                            <select class="form-control" id="Gender" th:field="*{gender}" >
+                                <option  value="" selected>Giới tính của bạn là ?</option>
                                 <option label="Nam" value="Nam" name="GIOITINH">Nam</option>
                                 <option label="Nữ" value="Nữ" name="GIOITINH">Nữ</option>
                             </select>
                         </div>
                     </div>
+                     <p th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" ></p>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col">
                     <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Mật khẩu" id="pwd" th:field="*{password}" required>
+                        <input type="password" class="form-control" placeholder="Mật khẩu" id="pwd" th:field="*{password}" >
+                        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" ></p>
                     </div>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col">
                     <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Nhập lại mật khẩu" id="pass" th:field="*{confirmPassword}" required>
-                    </div>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="col">
-                    <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Địa chỉ Email" id="email" th:field="*{email}" required>
+                        <input type="password" class="form-control" placeholder="Nhập lại mật khẩu" id="pass" th:field="*{confirmPassword}">
+                        <li th:each="err : ${#fields.hasGlobalErrors()}" th:errors="*{global}" />
                     </div>
                 </div>
             </div>

@@ -95,11 +95,6 @@ public class UserServicesImpl implements UserServices,UserDetailsService {
 		return userDto;
 	}
 	
-	private void passwordValidate(UserRegistrationDto registrationDto) {
-		String password = registrationDto.getPassword();
-		String confirmPassword = registrationDto.getConfirmPassword();
-		
-	}
 	
 	private Role checkRole() {
 		Role role = new Role();

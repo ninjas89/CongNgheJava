@@ -27,28 +27,23 @@ import lombok.Setter;
 public class User {
 	@Id
 	@Column
-	@NotEmpty(message = "Vui lòng nhập email của bạn")
 	private String email;
 	
-	@NotEmpty(message = "Vui lòng nhập Họ")
 	@Column(name = "last_name")
 	private String lastName;
 	
-	@NotEmpty(message = "Vui lòng nhập Tên")
 	@Column(name = "first_name")
 	private String firstName;
 	
 	@Column(name = "created_date")
 	private String createdDate;
 	
-	@NotEmpty(message = "Vui lòng chọn giới tính của bạn")
 	@Column
 	private String gender;
 	
 	@Column(name = "cash_amount") 
 	private Integer cashAmount;
 	
-	@NotEmpty(message = "Vui lòng nhập mật khẩu")
 	@Column
 	private String password;
 	
