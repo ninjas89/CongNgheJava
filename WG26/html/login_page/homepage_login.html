@@ -49,14 +49,21 @@
                     <li>
                         <a>
                             <form action="/action_page.php">
-                                <input type="text" placeholder="Tìm kiếm ứng dụng" name="search">
-                                <button type="submit"><i class="fa fa-search"></i></button>
+                                <button type="submit"><i class="glyphicon glyphicon-search"></i></button>
                             </form>
                         </a>
                     </li>
-                    <li><a href="#"><span class="glyphicon glyphicon-user "></span> Tài khoản</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-usd "></span> Nạp tiền</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-off"></span> Đăng xuất</a></li>
+
+                    <li><a href="#" class="dropdown-menu" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> Tài khoản</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" class="dropdown-item">Thông tin cá nhân</a></li>
+                            <li><a href="#" class="dropdown-item">Nạp tiền</a></li>
+                            <li><a href="#" class="dropdown-item">Lịch sử giao dịch</a></li>
+                            <li><a href="#" class="dropdown-item">Đăng xuất</a></li>
+                          
+                        </ul>
+                    </li>
+                    <li><a href="#"><span class="glyphicon glyphicon-off"></span> Giỏ hàng</a></li>
                 </ul>
 
                 <!-- <ul class="nav navbar-nav navbar-right findapp">
