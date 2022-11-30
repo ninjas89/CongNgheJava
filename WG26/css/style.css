@@ -73,6 +73,14 @@ body{
   font-size: 20px;
   font-weight: bold;
 }
+.dropdown-menu{
+  background-color: #222222;
+  border-color: #222222;
+}
+.dropdown-menu .dropdown-item{
+  color : white;
+}
+
 /*footer {
     background-color: #f2f2f2;
     padding: 25px;
