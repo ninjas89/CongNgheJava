@@ -65,6 +65,17 @@
             <h1 class="title">Ứng dụng nổi bật</h1>
         </div>
         <div class="row font">
+        
+        	<div class="col-sm-4" th:each="app : ${listApp}">
+                <div class="panel panel-primary">
+                    <div class="panel-heading camera" th:text="${app.appName}"></div>
+                    <div class="panel-body"><img src="../pics/765561-200.png" class=" img-responsive imgcmr"
+                            alt="Image">
+                    </div>
+                    <div class="panel-footer " th:text="${app.description}"></div>
+                </div>
+            </div>
+
             <div class="col-sm-4">
                 <div class="panel panel-primary">
                     <div class="panel-heading camera">Insta Camera</div>
