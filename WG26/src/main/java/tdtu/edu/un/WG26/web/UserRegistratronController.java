@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -17,12 +18,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import tdtu.edu.un.WG26.Service.UserServices;
-import tdtu.edu.un.WG26.Validation.PasswordCompare;
 import tdtu.edu.un.WG26.web.dto.UserRegistrationDto;
 
 @Controller
 @RequestMapping("register")
 public class UserRegistratronController {
+	@Autowired
 	private UserServices userServices;
 
 	public UserRegistratronController(UserServices userServices) {

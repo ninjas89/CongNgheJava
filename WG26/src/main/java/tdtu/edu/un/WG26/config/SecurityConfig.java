@@ -1,16 +1,29 @@
 package tdtu.edu.un.WG26.config;
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.constraints.NotEmpty;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import tdtu.edu.un.WG26.Model.User;
 
 @Configuration
 @EnableWebSecurity
@@ -29,6 +42,7 @@ public class SecurityConfig {
 		http.authorizeRequests().antMatchers( "/js/**",
                 "/css/**",
                 "/img/**",
+				"/message/register",
 				"/register**",
 				"/login*").permitAll()
 		.anyRequest().authenticated()
@@ -40,6 +54,15 @@ public class SecurityConfig {
 			    .passwordParameter("password")
 				.loginProcessingUrl("/login")
 				.defaultSuccessUrl("/home")
+				.failureHandler(new AuthenticationFailureHandler() {
+					
+					@Override
+					public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
+							AuthenticationException exception) throws IOException, ServletException {
+						// TODO Auto-generated method stub
+						
+					}
+				})
 				.permitAll()
 		)
 		.logout()
@@ -51,10 +74,5 @@ public class SecurityConfig {
 		
 		return http.build();
 	}
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(passEncoder());
-    }
+
 }

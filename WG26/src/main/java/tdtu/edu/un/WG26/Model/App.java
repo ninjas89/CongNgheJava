@@ -15,6 +15,12 @@ public class App {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private Integer id;
+	
+	@Column
+	private String genre;
+	
+	@Column(name = "tag_name")
+	private String tagName;
 
 	@Column(name = "app_name")
 	private String appName;
@@ -36,15 +42,17 @@ public class App {
 	
 	@Column(name="avatar_path")
 	private String avatarPath;
-
+	
 	public App() {
 		super();
 	}
-
-	public App(Integer id, String appName, String description, Integer price, String publisher, Integer purchaseTime,
-			String downloadPath, String avatarPath) {
+	
+	public App(Integer id, String genre, String tagName, String appName, String description, Integer price,
+			String publisher, Integer purchaseTime, String downloadPath, String avatarPath) {
 		super();
 		this.id = id;
+		this.genre = genre;
+		this.tagName = tagName;
 		this.appName = appName;
 		this.description = description;
 		this.price = price;
@@ -53,7 +61,27 @@ public class App {
 		this.downloadPath = downloadPath;
 		this.avatarPath = avatarPath;
 	}
-	
+
+
+
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+
+	public String getTagName() {
+		return tagName;
+	}
+
+
+
+	public void setTagName(String tagName) {
+		this.tagName = tagName;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -120,9 +148,11 @@ public class App {
 
 	@Override
 	public String toString() {
-		return "App [id=" + id + ", appName=" + appName + ", description=" + description + ", price=" + price
-				+ ", publisher=" + publisher + ", purchaseTime=" + purchaseTime + ", downloadPath=" + downloadPath
-				+ ", avatarPath=" + avatarPath + "]";
+		return "App [id=" + id + ", genre=" + genre + ", tagName=" + tagName + ", appName=" + appName + ", description="
+				+ description + ", price=" + price + ", publisher=" + publisher + ", purchaseTime=" + purchaseTime
+				+ ", downloadPath=" + downloadPath + ", avatarPath=" + avatarPath + "]";
 	}
+
+	
 }
 	

@@ -16,7 +16,7 @@
 
 <body>
 	<div th:if="${param.error}">
-    	<div class="alert alert-info">Invalid Your Email</div>
+    	<div class="alert alert-info" >lỗi</div>
     </div>
     <div class="container col-4 col-md-4  loginform">
         <form method="post" th:action="@{/login}" role="form">
@@ -28,11 +28,11 @@
             </div>
             <div class="form-group">
                 <label for="user" class="font-weight-bolder lead">Email : </label>
-                <input type="text" class="form-control" placeholder="Tài khoản" id="email"  name="email"  required>
+                <input type="text" class="form-control" placeholder="Tài khoản" id="email"  name="email"  >
             </div>
             <div class="form-group">
                 <label for="pwd" class="font-weight-bolder lead pass">Mật khẩu : </label>
-                <input type="password" class="form-control " placeholder="Mật khẩu" id="password" name="password" required>
+                <input type="password" class="form-control " placeholder="Mật khẩu" id="password" name="password" >
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">

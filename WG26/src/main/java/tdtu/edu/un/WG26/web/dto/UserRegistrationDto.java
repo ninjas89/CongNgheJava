@@ -1,19 +1,10 @@
 package tdtu.edu.un.WG26.web.dto;
 
-
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Target;
-
-import javax.validation.Constraint;
-import javax.validation.GroupSequence;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
-import org.hibernate.validator.constraints.UniqueElements;
-import org.springframework.stereotype.Indexed;
-
+import tdtu.edu.un.WG26.Validation.EmailValidated;
 import tdtu.edu.un.WG26.Validation.PasswordCompare;
 @PasswordCompare
 public class UserRegistrationDto {
@@ -24,6 +15,7 @@ public class UserRegistrationDto {
 	private String lastName;
 	@NotBlank(message = "Vui lòng chọn giới tính của bạn")
 	private String gender;
+	@EmailValidated
 	@Email(message = "Email không hợp lệ vui lòng nhập lại", regexp = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])")
 	private String email;
 	@NotEmpty(message = "Vui lòng nhập mật khẩu")
