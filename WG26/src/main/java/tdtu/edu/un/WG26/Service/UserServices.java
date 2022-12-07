@@ -12,5 +12,5 @@ import tdtu.edu.un.WG26.web.dto.UserRegistrationDto;
 public interface UserServices{
 	User save(UserRegistrationDto registrationDto);
 	List<UserRegistrationDto> findAllUsers();
-	User findbyEmail(String email);
+	User findByEmail(String email);
 }

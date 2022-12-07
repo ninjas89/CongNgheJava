@@ -15,7 +15,7 @@
 
 <body>
     <div class="container col-4 col-md-4 regisform">
-        <form method="POST" action="../handle/register1.php">
+        <form method="POST" enctype="multipart/form-data" th:action="@{/addapp}" th:object="${app}">
             <div class="row">
                 <img src="/src/main/resources/static/img/logo2.png" class="logoreg m-auto p-2">
             </div>
@@ -27,7 +27,15 @@
             <div class="form-row">
                 <div class="col">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Tên ứng dụng" id="nameapp" name="TENAPP">
+                        <input type="text" class="form-control" placeholder="Tên ứng dụng" id="nameapp" name="appName">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Tên nhà phát hành" id="publisher" name="publisher">
                     </div>
                 </div>
             </div>
@@ -36,7 +44,7 @@
                 <div class="col">
                     <div class="form-group">
                         <div class="gender">
-                            <select id="category" class="form-control">
+                            <select id="category" name="genre" class="form-control">
                                 <option value="Emp" name='LOAI' disabled selected>Vui lòng chọn loại</option>
                                 <option label="Giải trí" value="game" name='LOAI' >Giải trí</option>
                                 <option label="Xem phim" value="phim" name='LOAI' >Xem phim</option>
@@ -46,38 +54,42 @@
                     </div>
                 </div>
             </div>
+            
             <div class="form-row">
                 <div class="col">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Thể loại" id="theloai" name="THELOAI">
+                        <input type="text" class="form-control" placeholder="Thể loại" id="theloai" name="tagName">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-group">
+                        <input type="text" class="form-control appdescription" placeholder="Mô tả" id="description" name="description">
                     </div>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col">
                     <div class="form-group">
-                        <input type="text" class="form-control appdescription" placeholder="Mô tả" id="description" name="MOTA">
+                        <input type="text" class="form-control" placeholder="Giá thành" id="price" name="price">
                     </div>
                 </div>
             </div>
-            <div class="form-row">
-                <div class="col">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Giá thành" id="price" name="GIA">
-                    </div>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="col">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Link tải ứng dụng" id="link" name="LINK">
-                    </div>
-                </div>
-            </div>
-            <div class="form-row">
+			<div class="form-row">
+				<div class="col">
+					<div class="form-group ">
+					<p>File hình ảnh sản phẩm: </p>
+						<input type="file" name="avatarPath">
+					</div>
+				</div>
+			</div>
+			<div class="form-row">
                 <div class="col">
                     <div class="form-group ">
-                        <input type="file" name="imgname">
+                    	<p>File zip sản phẩm: </p>
+                        <input type="file" name="downloadPath">
                     </div>
                     <div class=" form-row">
                         <div class="col">

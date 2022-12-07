@@ -19,7 +19,7 @@ public class EmailValidatedValidator implements ConstraintValidator<EmailValidat
     }
 	@Override
 	public boolean isValid(String email, ConstraintValidatorContext context) {
-		User user = userServices.findbyEmail(email);
+		User user = userServices.findByEmail(email);
 		if(user != null) {
 			return false;
 		}

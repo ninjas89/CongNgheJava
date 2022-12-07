@@ -27,7 +27,7 @@ public class UserRegistratronController {
 	private UserServices userServices;
 
 	public UserRegistratronController(UserServices userServices) {
-		super();
+		super(); 
 		this.userServices = userServices; 
 	} 
 	
