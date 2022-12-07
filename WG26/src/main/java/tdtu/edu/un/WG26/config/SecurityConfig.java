@@ -39,6 +39,8 @@ public class SecurityConfig {
     @Autowired
     private UserDetailsService userDetailsService;
     
+    @Autowired
+    private SuccessHandlerConfig successHandlerConfig;
     
     @Bean
 	public static PasswordEncoder passEncoder() {
@@ -62,7 +64,7 @@ public class SecurityConfig {
 				    .usernameParameter("email")
 				    .passwordParameter("password")
 					.loginProcessingUrl("/login")
-					.defaultSuccessUrl("/home?success")
+					.successHandler(successHandlerConfig)
 					.failureHandler(new SimpleUrlAuthenticationFailureHandler() {
 						
 						@Override
