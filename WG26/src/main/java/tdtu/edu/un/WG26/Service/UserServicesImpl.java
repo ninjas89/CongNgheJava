@@ -2,19 +2,12 @@ package tdtu.edu.un.WG26.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
-import org.springframework.security.authentication.jaas.AuthorityGranter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -61,8 +54,9 @@ public class UserServicesImpl implements UserServices,UserDetailsService {
 		return userRepository.save(user);
 		
 	}
+	
 	@Override
-	public User findbyEmail(String email) {
+	public User findByEmail(String email) {
 		return userRepository.findByEmail(email);
 	}
 	
@@ -73,9 +67,10 @@ public class UserServicesImpl implements UserServices,UserDetailsService {
 				.map((user)-> mapToUserRegistrationDto(user))
 				.collect(Collectors.toList());
 	}
+	
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		User user = findbyEmail(email);
+		User user = findByEmail(email);
         if (user == null) {
             throw new UsernameNotFoundException("");
         }
