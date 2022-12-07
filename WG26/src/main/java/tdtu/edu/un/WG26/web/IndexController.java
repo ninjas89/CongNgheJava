@@ -3,29 +3,39 @@ package tdtu.edu.un.WG26.web;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import tdtu.edu.un.WG26.Model.App;
 import tdtu.edu.un.WG26.Service.AppServices;
+import tdtu.edu.un.WG26.Service.UserServices;
+import tdtu.edu.un.WG26.config.LoadUserDetail;
 
 
 @Controller
 public class IndexController {
-
+	
 	@Autowired
 	private AppServices appServices;
 	
-	public IndexController (AppServices appServices) {
-		super();
-		this.appServices = appServices;
-	}
- 
+	@Autowired
+	private UserServices userServices;
+	
 	@GetMapping("/home")
-	public String getHomePage(ModelMap model) {
+	public String getUserHome(@AuthenticationPrincipal LoadUserDetail userDetail,Model model) {
 		List<App> listApp = appServices.fetchAppList();
-		model.addAttribute("listApp", listApp);
-		return "home";
+		if(userDetail == null) {
+			return"redirect: /home?";
+		}
+		else {
+			String username = userDetail.getUsername();
+			model.addAttribute("listApp", listApp);
+			model.addAttribute("username",username);
+			System.out.println(username);
+			return "home";
+		}
 	}
 }
+

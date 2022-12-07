@@ -25,6 +25,7 @@ import tdtu.edu.un.WG26.Model.Role;
 import tdtu.edu.un.WG26.Model.User;
 import tdtu.edu.un.WG26.Repository.RoleRepository;
 import tdtu.edu.un.WG26.Repository.UserRepository;
+import tdtu.edu.un.WG26.config.LoadUserDetail;
 import tdtu.edu.un.WG26.web.dto.UserRegistrationDto;
 
 @Service
@@ -75,17 +76,11 @@ public class UserServicesImpl implements UserServices,UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		User user = findbyEmail(email);
-		System.out.println(email);
-		System.out.println(user.getRole());
-		
-		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), getAuthorities(user));
+        if (user == null) {
+            throw new UsernameNotFoundException("");
+        }
+		return new LoadUserDetail(user);
 	}
-	
-    private static Collection<? extends GrantedAuthority> getAuthorities(User user) {
-        String userRoles = user.getRole().getRole();
-        Collection<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(userRoles);
-        return authorities;
-    }
 	
 	private UserRegistrationDto mapToUserRegistrationDto(User user) {
 		UserRegistrationDto userDto = new UserRegistrationDto();
@@ -98,10 +93,7 @@ public class UserServicesImpl implements UserServices,UserDetailsService {
 	
 	private Role checkRole() {
 		Role role = new Role();
-		role.setRole("USER");
+		role.setRole("ADMIN");
 		return roleRepository.save(role);
 	}
-	
-	 
-	
 }

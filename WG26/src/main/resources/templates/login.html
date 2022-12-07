@@ -15,8 +15,8 @@
 </head>
 
 <body>
-	<div th:if="${param.error}">
-    	<div class="alert alert-info" >lỗi</div>
+	<div th:if="${param.error} and ${param.email} == null and ${param.password} == null">
+    	<div class="alert alert-info" >Tài Khoản hoặc mật khẩu không đúng vui lòng nhập lại</div>
     </div>
     <div class="container col-4 col-md-4  loginform">
         <form method="post" th:action="@{/login}" role="form">
@@ -29,10 +29,12 @@
             <div class="form-group">
                 <label for="user" class="font-weight-bolder lead">Email : </label>
                 <input type="text" class="form-control" placeholder="Tài khoản" id="email"  name="email"  >
+                <p th:if="${param.email}"> Vui lòng nhập email</p>
             </div>
             <div class="form-group">
                 <label for="pwd" class="font-weight-bolder lead pass">Mật khẩu : </label>
                 <input type="password" class="form-control " placeholder="Mật khẩu" id="password" name="password" >
+                <p th:if="${param.password}"> Vui lòng nhập mật khẩu</p>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
@@ -53,7 +55,7 @@
             </div>
 
             <div class="form-group text-center font-weight-bolder">
-                <a href="home.html" class="m-auto">Quay lại</a>
+                <a th:href="@{/home}" class="m-auto">Quay lại</a>
             </div>
     	</form>
     </div>

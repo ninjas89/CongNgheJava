@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -25,7 +26,7 @@ import lombok.Setter;
 @Table(name="user")
 public class User {
 	@Id
-	@Column
+	@Column(name = "email")
 	private String email;
 	
 	@Column(name = "last_name")
@@ -59,6 +60,10 @@ public class User {
         inverseJoinColumns = { @JoinColumn(name = "role_id", referencedColumnName = "id") }
 	)
 	private Role role;
+	
+	@ManyToMany(mappedBy = "userChooseLists",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	private List<App> apps = new ArrayList<>();
+
 
 	public User() {
 		super();

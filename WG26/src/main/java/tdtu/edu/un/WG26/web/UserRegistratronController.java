@@ -46,7 +46,7 @@ public class UserRegistratronController {
         if(result.hasErrors()){
         	System.out.println(result.getAllErrors());
         	System.out.println(result.getGlobalErrorCount());
-            return "register";
+            return "register?error";
         }
 		else {
 			userServices.save(registrationDto);
