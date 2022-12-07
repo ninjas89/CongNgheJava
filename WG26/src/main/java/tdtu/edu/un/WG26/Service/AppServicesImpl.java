@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import tdtu.edu.un.WG26.Model.App;
 import tdtu.edu.un.WG26.Repository.AppRepository;
+import tdtu.edu.un.WG26.web.dto.AppDto;
 
 @Service
 public class AppServicesImpl implements AppServices{
@@ -23,4 +24,20 @@ public class AppServicesImpl implements AppServices{
 		return apps;
 	}
 
+	@Override
+	public App save(AppDto appDto) {
+
+		App app = new App(appDto.getGenre(),
+				appDto.getTagName(),
+				appDto.getAppName(),
+				appDto.getDescription(),
+				appDto.getPrice(),
+				appDto.getPublisher(),
+				appDto.getPurchaseTime(),
+				appDto.getDownloadPath(),
+				appDto.getAvatarPath());
+
+		return appRepository.save(app);
+
+	}
 }
