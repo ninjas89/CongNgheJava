@@ -40,4 +40,9 @@ public class AppServicesImpl implements AppServices{
 		return appRepository.save(app);
 
 	}
+
+	@Override
+	public App findbyAppName(String appName) {
+		return appRepository.findByAppName(appName);
+	}
 }

@@ -10,4 +10,6 @@ public interface AppServices {
 	List<App> fetchAppList();
 
 	App save(AppDto appDto);
+	
+	App findbyAppName(String appName);
 }

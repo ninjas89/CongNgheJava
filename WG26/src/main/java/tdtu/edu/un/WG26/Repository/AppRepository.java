@@ -7,5 +7,5 @@ import tdtu.edu.un.WG26.Model.App;
 
 @Repository
 public interface AppRepository extends JpaRepository<App, Integer>{
-	
+	public App findByAppName(String appName);
 }
