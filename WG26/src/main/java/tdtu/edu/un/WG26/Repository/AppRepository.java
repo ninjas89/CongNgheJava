@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import tdtu.edu.un.WG26.Model.App;
 
 @Repository
-public interface AppRepository extends JpaRepository<App, Integer>{
+public interface AppRepository extends JpaRepository<App, Long>{
 	public App findByAppName(String appName);
 }

@@ -1,7 +1,6 @@
 package tdtu.edu.un.WG26.Model;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,17 +13,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="app")
 public class App {
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	private Integer id;
+	private Long id;
 	
 	@Column
 	private String genre;
@@ -57,7 +54,7 @@ public class App {
 	@JoinTable(
 		name = "basket",
         joinColumns = { @JoinColumn(name = "app_id", referencedColumnName = "id") },
-        inverseJoinColumns = { @JoinColumn(name = "user", referencedColumnName = "email") }
+        inverseJoinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") }
 		)
 	private List<User> userChooseLists = new ArrayList<>();
 	
@@ -95,11 +92,11 @@ public class App {
 		this.tagName = tagName;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
