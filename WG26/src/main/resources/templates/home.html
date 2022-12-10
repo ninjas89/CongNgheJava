@@ -38,12 +38,10 @@
 
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="home.html">Trang chủ</a></li>
-					<li><a href="appentertainment.html">Giải trí</a></li>
-					<li><a href="appfilm.html">Xem phim</a></li>
-					<li><a href="appbook.html">Đọc sách</a></li>
-					<li><a href="apppay.html">Ứng dụng trả phí</a></li>
-					<li><a href="appfree.html">Ứng dụng miễn phí</a></li>
+					<li class="active"><a th:href="@{/home}">Trang chủ</a></li>
+					<li><a th:href="@{/home/app-entertainment}">Giải trí</a></li>
+					<li><a th:href="@{/home/app-film}">Xem phim</a></li>
+					<li><a th:href="@{/home/app-book}">Đọc sách</a></li>
 					<li><a href="contact.html">Liên hệ</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right"
@@ -80,8 +78,9 @@
 		</div>
 		<div class="row font">
 
+			<div class="col-sm-4" th:each="app : ${listApp}"
+				th:if="${app.tagName} == 'game'">
 
-			<div class="col-sm-4" th:each="app : ${listApp}">
 				<a th:href="@{/home/} + ${app.appName}">
 					<div class="panel panel-primary">
 						<div class="panel-heading camera" th:text="${app.appName}"></div>
@@ -89,40 +88,8 @@
 							<img th:src="${app.avatarPath}" class=" img-responsive imgcmr"
 								alt="Image">
 						</div>
-						<div class="panel-footer " th:text="${app.description}"></div>
 					</div>
 				</a>
-			</div>
-
-			<div class="col-sm-4">
-				<div class="panel panel-primary">
-					<div class="panel-heading camera">Insta Camera</div>
-					<div class="panel-body">
-						<img src="../pics/765561-200.png" class=" img-responsive imgcmr"
-							alt="Image">
-					</div>
-					<div class="panel-footer ">Ứng dụng chụp ảnh film</div>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="panel panel-danger">
-					<div class="panel-heading">Hiệp Khách</div>
-					<div class="panel-body">
-						<img src="../pics/hiepkhach.png" class="img-responsive imgcmr"
-							alt="Image">
-					</div>
-					<div class="panel-footer">Game mobile đỉnh cao năm 2021</div>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="panel panel-success">
-					<div class="panel-heading">Alice in Wonderland</div>
-					<div class="panel-body">
-						<img src="../pics/alicesquare.png" class="img-responsive imgcmr"
-							alt="Image">
-					</div>
-					<div class="panel-footer">Câu chuyện của Alice ở xứ thần kỳ</div>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -134,35 +101,18 @@
 
 		</div>
 		<div class="row font">
-			<div class="col-sm-4">
-				<div class="panel panel-primary">
-					<div class="panel-heading">Cô gái đến từ hư vô phần hai</div>
-					<div class="panel-body">
-						<img src="../pics/Co-Gai-Den-Tu-Hu-Vo-2.jpg"
-							class="img-responsive imgcmr" alt="Image">
+			<div class="col-sm-4" th:each="app : ${listApp}"
+				th:if="${app.tagName} == 'sach'">
+
+				<a th:href="@{/home/} + ${app.appName}">
+					<div class="panel panel-primary">
+						<div class="panel-heading camera" th:text="${app.appName}"></div>
+						<div class="panel-body">
+							<img th:src="${app.avatarPath}" class=" img-responsive imgcmr"
+								alt="Image">
+						</div>
 					</div>
-					<div class="panel-footer">Nano</div>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="panel panel-primary">
-					<div class="panel-heading">And then there were none</div>
-					<div class="panel-body">
-						<img src="../pics/maxresdefault.jpg" class="img-responsive imgcmr"
-							alt="Image">
-					</div>
-					<div class="panel-footer">Mười người da đen nhỏ</div>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="panel panel-primary">
-					<div class="panel-heading">A Study In Scarlet</div>
-					<div class="panel-body">
-						<img src="../pics/220px-ArthurConanDoyle_AStudyInScarlet.jpg"
-							class="img-responsive imgcmr" alt="Image">
-					</div>
-					<div class="panel-footer">Sherlock Holmes</div>
-				</div>
+				</a>
 			</div>
 		</div>
 	</div>
@@ -174,37 +124,20 @@
 			<h1 class="title">Phim nổi bật</h1>
 		</div>
 		<div class="row font">
-			<div class="col-sm-4">
-				<div class="panel panel-primary">
-					<div class="panel-heading">Cô gái đến từ hư vô phần hai</div>
-					<div class="panel-body">
-						<img src="../pics/Co-Gai-Den-Tu-Hu-Vo-2.jpg"
-							class="img-responsive imgcmr" alt="Image">
+			<div class="col-sm-4" th:each="app : ${listApp}"
+				th:if="${app.tagName} == 'phim'">
+
+				<a th:href="@{/home/} + ${app.appName}">
+					<div class="panel panel-primary">
+						<div class="panel-heading camera" th:text="${app.appName}"></div>
+						<div class="panel-body">
+							<img th:src="${app.avatarPath}" class=" img-responsive imgcmr"
+								alt="Image">
+						</div>
 					</div>
-					<div class="panel-footer">Nano</div>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="panel panel-primary">
-					<div class="panel-heading">And then there were none</div>
-					<div class="panel-body">
-						<img src="../pics/maxresdefault.jpg" class="img-responsive imgcmr"
-							alt="Image">
-					</div>
-					<div class="panel-footer">Mười người da đen nhỏ</div>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="panel panel-primary">
-					<div class="panel-heading">A Study In Scarlet</div>
-					<div class="panel-body">
-						<img src="../pics/220px-ArthurConanDoyle_AStudyInScarlet.jpg"
-							class="img-responsive imgcmr" alt="Image">
-					</div>
-					<div class="panel-footer">Sherlock Holmes</div>
-				</div>
-			</div>
-		</div>
+				</a>
+			</div>	
+		</div>			
 	</div>
 
 	<!--<footer class="container-fluid text-center">

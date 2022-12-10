@@ -96,20 +96,11 @@ public class AdminController {
         try (OutputStream os = Files.newOutputStream(file)) {
             os.write(avatarPath.getBytes());
         }
-        
-		/*
-		 * byte[] bytes = null; try { bytes = imageFile.getBytes(); } catch (IOException
-		 * e) { // TODO Auto-generated catch block e.printStackTrace(); }
-		 * 
-		 * String folderPath = "/img/upload/" + imageFile.getOriginalFilename(); Path
-		 * path = Paths.get(folderPath); try {
-		 * 
-		 * Files.write(path, bytes); System.out.println("-----"); } catch (IOException
-		 * e) { // TODO Auto-generated catch block e.printStackTrace(); } AppDto appDto */
+    
         AppDto appDto = new AppDto(genre, tagName, appName, description, price, publisher, 0, "", "/img/upload/" + avatarPath.getOriginalFilename());
 		 
 		appServices.save(appDto);
 		
-		return "redirect:admin/add-app";
+		return "redirect:/admin/add-app";
 	}
 }

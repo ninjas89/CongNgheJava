@@ -48,5 +48,39 @@ public class IndexController {
 		
 		return "appinformation";
 	}
+	
+	@GetMapping("/home/app-entertainment")
+	public String getAppEntertainmentHomepage(Model model) {
+		String tagName = "game";
+		
+		List<App> appList = appServices.fetchAppEntertainmentList(tagName);
+		
+		model.addAttribute("appList", appList);
+		
+		return "appentertainment";
+	}
+	
+	@GetMapping("/home/app-book")
+	public String getAppBookHomepage(Model model) {
+		String tagName = "sach";
+		
+		List<App> appList = appServices.fetchAppEntertainmentList(tagName);
+		
+		model.addAttribute("appList", appList);
+		
+		return "appbook";
+	}
+	
+	@GetMapping("/home/app-film")
+	public String getAppFilmHomepage(Model model) {
+		String tagName = "phim";
+		
+		List<App> appList = appServices.fetchAppEntertainmentList(tagName);
+		
+		model.addAttribute("appList", appList);
+		
+		return "appfilm";
+	}
+	
 }
 

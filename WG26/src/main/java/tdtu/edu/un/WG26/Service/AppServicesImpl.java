@@ -45,4 +45,11 @@ public class AppServicesImpl implements AppServices{
 	public App findbyAppName(String appName) {
 		return appRepository.findByAppName(appName);
 	}
+
+	@Override
+	public List<App> fetchAppEntertainmentList(String tagName) {
+		List<App> apps = appRepository.findByTagName(tagName);
+		
+		return apps;
+	}
 }
