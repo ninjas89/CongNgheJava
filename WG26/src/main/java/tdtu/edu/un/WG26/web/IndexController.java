@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import tdtu.edu.un.WG26.Model.App;
+import tdtu.edu.un.WG26.Model.User;
 import tdtu.edu.un.WG26.Service.AppServices;
 import tdtu.edu.un.WG26.Service.UserServices;
 import tdtu.edu.un.WG26.config.LoadUserDetail;
@@ -26,7 +27,7 @@ public class IndexController {
 	private UserServices userServices;
 	
 	@GetMapping("/home")
-	public String getUserHome(@AuthenticationPrincipal LoadUserDetail userDetail,Model model) {
+	public String getUserHome(@AuthenticationPrincipal LoadUserDetail userDetail, Model model) {
 		List<App> listApp = appServices.fetchAppList();
 		if(userDetail == null) {
 			return"redirect: /home?";
@@ -35,7 +36,6 @@ public class IndexController {
 			String username = userDetail.getUsername();
 			model.addAttribute("listApp", listApp);
 			model.addAttribute("username",username);
-			System.out.println(username);
 			return "home";
 		}
 	}
@@ -50,37 +50,53 @@ public class IndexController {
 	}
 	
 	@GetMapping("/home/app-entertainment")
-	public String getAppEntertainmentHomepage(Model model) {
+	public String getAppEntertainmentHomepage(@AuthenticationPrincipal LoadUserDetail userDetail, Model model) {
 		String tagName = "game";
+		String username = userDetail.getUsername();
 		
 		List<App> appList = appServices.fetchAppEntertainmentList(tagName);
 		
 		model.addAttribute("appList", appList);
+		model.addAttribute("username",username);
 		
 		return "appentertainment";
 	}
 	
 	@GetMapping("/home/app-book")
-	public String getAppBookHomepage(Model model) {
+	public String getAppBookHomepage(@AuthenticationPrincipal LoadUserDetail userDetail, Model model) {
 		String tagName = "sach";
+		String username = userDetail.getUsername();
 		
 		List<App> appList = appServices.fetchAppEntertainmentList(tagName);
 		
 		model.addAttribute("appList", appList);
+		model.addAttribute("username",username);
 		
 		return "appbook";
 	}
 	
 	@GetMapping("/home/app-film")
-	public String getAppFilmHomepage(Model model) {
+	public String getAppFilmHomepage(@AuthenticationPrincipal LoadUserDetail userDetail, Model model) {
 		String tagName = "phim";
+		String username = userDetail.getUsername();
 		
 		List<App> appList = appServices.fetchAppEntertainmentList(tagName);
 		
 		model.addAttribute("appList", appList);
+		model.addAttribute("username",username);
 		
 		return "appfilm";
 	}
 	
+	@GetMapping("/home/account")
+	public String getUserInfo(@AuthenticationPrincipal LoadUserDetail userDetail, Model model) {
+		String email = userDetail.getUsername();
+		
+		User user = userServices.findByEmail(email);
+
+		model.addAttribute("userInfo", user);
+		
+		return "userform";
+	}
 }
 
