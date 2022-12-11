@@ -22,6 +22,7 @@ import tdtu.edu.un.WG26.Model.User;
 import tdtu.edu.un.WG26.Service.AdminServices;
 import tdtu.edu.un.WG26.Service.AppServices;
 import tdtu.edu.un.WG26.Service.CardServices;
+import tdtu.edu.un.WG26.Service.UserServices;
 import tdtu.edu.un.WG26.web.dto.AppDto;
 
 @Controller
@@ -35,6 +36,9 @@ public class AdminController {
 	@Autowired
 	private CardServices cardServices;
 	
+	@Autowired
+	private UserServices userServices;
+
 	private static final Path CURRENT_FOLDER = Paths.get(System.getProperty("user.dir"));
 
 	@ModelAttribute("app") 
@@ -51,7 +55,6 @@ public class AdminController {
 	public String getAllUser(Model model) {
 		List<User> userList = adminServices.fetchAllUser();
 		model.addAttribute("userList", userList);
-		System.out.println(userList);
 		return "admin";
 	}
 	
@@ -72,6 +75,12 @@ public class AdminController {
 	@GetMapping("admin/add-app")
 	public String getAddAppPage() {
 		return "addapp";  
+	}
+
+	@PostMapping("admin/delete-user")
+	public String deleteUser(@RequestParam("id") Long id) {
+		userServices.deleteUserById(id);
+		return "redirect:/admin/get-all-user";
 	}
 
 	@PostMapping("admin/add-app")

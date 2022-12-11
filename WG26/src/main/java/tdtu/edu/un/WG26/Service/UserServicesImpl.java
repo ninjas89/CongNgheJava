@@ -82,10 +82,16 @@ public class UserServicesImpl implements UserServices,UserDetailsService {
 		return userDto;
 	}
 	
-	
 	private Role checkRole() {
 		Role role = new Role();
 		role.setRole("ADMIN");
 		return roleRepository.save(role);
+	}
+
+
+	@Override
+	public void deleteUserById(Long userId) {
+		userRepository.deleteById(userId);	
+		System.out.println("Delete user successfully");
 	}
 }
