@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Ứng dụng giải trí</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<body>
+
+    <div class="homepage">
+        <div class=" text-center homepageborder">
+            <img src="/img/logo2.png" class="mt-3 logohomepage">
+            <p>WG26 - For The Best Web Application</p>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a th:href="@{/home}">Trang chủ</a></li>
+					<li class="active"><a th:href="@{/home/app-entertainment}">Giải trí</a></li>
+					<li><a th:href="@{/home/app-film}">Xem phim</a></li>
+					<li><a th:href="@{/home/app-book}">Đọc sách</a></li>
+					<li><a href="contact.html">Liên hệ</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right"
+					th:if="${param.success} != null">
+					<li><a th:href="@{/home/account}"><span class="glyphicon glyphicon-user "
+							th:text="${username}"></span></a></li>
+					<li><a th:href="@{/logout}"><span
+							class="glyphicon glyphicon-user"></span> Đăng xuất</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right"
+					th:if="${param.success} == null">
+					<li><a th:href="@{/login}"><span
+							class="glyphicon glyphicon-user "></span> Đăng nhập</a></li>
+					<li><a th:href="@{/register}"><span
+							class="glyphicon glyphicon-user"></span> Đăng kí</a></li>
+				</ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a>
+                            <form action="/action_page.php">
+                                <input type="text" placeholder="Tìm kiếm ứng dụng" name="search">
+                                <button type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+	<div class="container">
+		<div class="row">
+			<h1 class="title">Ứng dụng giải trí nổi bật</h1>
+		</div>
+		<div class="row font">
+
+			<div class="col-sm-4" th:each="app : ${appList}">
+				<a th:href="@{/home/} + ${app.appName}">
+					<div class="panel panel-danger">
+						<div class="panel-heading" th:text="${app.appName}"></div>
+						<div class="panel-body">
+							<img th:src="${app.avatarPath}" class="img-responsive imgcmr"
+								alt="Image">
+						</div>
+
+					</div>
+				</a>
+			</div>
+
+		</div>
+	</div>
+	<br>
+
+
+
+    <!--<footer class="container-fluid text-center">
+        <p>Online Store Copyright</p>
+        <form class="form-inline">Get deals:
+            <input type="email" class="form-control" size="50" placeholder="Email Address">
+            <button type="button" class="btn btn-danger">Sign Up</button>
+        </form>
+    </footer>
+-->
+</body>
+
+</html>

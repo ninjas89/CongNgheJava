@@ -2,21 +2,18 @@ package tdtu.edu.un.WG26.Model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,6 +23,9 @@ import lombok.Setter;
 @Table(name="user")
 public class User {
 	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
 	@Column(name = "email")
 	private String email;
 	
@@ -56,7 +56,7 @@ public class User {
 	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinTable(
 		name = "user_role",
-        joinColumns = { @JoinColumn(name = "user_email", referencedColumnName = "email") },
+        joinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") },
         inverseJoinColumns = { @JoinColumn(name = "role_id", referencedColumnName = "id") }
 	)
 	private Role role;
@@ -78,6 +78,15 @@ public class User {
 		this.gender = gender;
 		this.password = password;
 	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Role getRole() {
 		return role;
 	}
@@ -143,12 +152,12 @@ public class User {
 	}
 
 
-	public String getPhonenNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhonenNumber(String phonenNumber) {
-		this.phoneNumber = phonenNumber;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public String getAvatarPath() {
@@ -163,8 +172,7 @@ public class User {
 	public String toString() {
 		return "User [email=" + email + ", lastName=" + lastName + ", firstName=" + firstName + ", createdDate="
 				+ createdDate + ", gender=" + gender + ", cashAmount=" + cashAmount + ", password=" + password
-				+ ", phonenNumber=" + phoneNumber + ", avatarPath=" + avatarPath + "]";
-	}
-
+				+ ", phoneNumber=" + phoneNumber + ", avatarPath=" + avatarPath + "]";
+	}	
 
 }

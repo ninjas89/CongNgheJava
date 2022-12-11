@@ -39,7 +39,7 @@
                             </div>
 
                             <div class="row">
-                                <img src="/src/main/resources/static/img/logo2.png" class="logouserform m-auto ">
+                                <img src="/img/logo2.png" class="logouserform m-auto ">
                             </div>
                         </div>
                     </div>
@@ -54,33 +54,33 @@
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label for="lastname" th:text="${user.first_name}"></label>
-                                    <input type="text" class="form-control" id="lastname" placeholder="Nhập họ của bạn" th:text="${user.first_name}">
+                                    <label for="lastname">Họ : </label>
+                                    <input type="text" class="form-control" id="lastname" placeholder="Nhập họ của bạn" th:value="${user.firstName}">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="firstname">Tên : </label>
                                     <input type="text" class="form-control" id="firstname"
-                                        placeholder="Nhập tên của bạn" th:text="${user.last_name}">
+                                        placeholder="Nhập tên của bạn" th:value="${user.lastName}">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="email">Email : </label>
                                     <input type="email" class="form-control" id="email"
-                                        placeholder="Nhập email của bạn" th:text="${user.email}">
+                                        placeholder="Nhập email của bạn" th:value="${user.email}">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="gender">Giới tính : </label>
                                     <div class="gender">
-                                        <select name="GIOITINH" id="Gender" class="form-control" th:text="${user.gender}">
+                                        <select name="GIOITINH" id="Gender" class="form-control" th:switch="${user.gender}">
                                             <option value="Emp" disabled selected>Giới tính của bạn là ?</option>
-                                            <option label="Nam" value="Nam" name="GIOITINH">Nam</option>
-                                            <option label="Nữ" value="Nữ" name="GIOITINH">Nữ</option>
-                                            <option label="Khác" value="Khác" name="GIOITINH">Khác</option>
+                                            <option label="Nam" value="Nam" name="GIOITINH" th:case="'Nam'" selected>Nam</option>
+                                            <option label="Nữ" value="Nữ" name="GIOITINH" th:case="'Nữ'" selected>Nữ</option>
+                                            <option label="Khác" value="Khác" name="GIOITINH" th:case="'Khác'" selected>Khác</option>
                                         </select>
                                     </div>
                                 </div>
@@ -119,7 +119,7 @@
                         <div class="row gutters">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="text-right">
-                                   <a href="#" type="submit" name="cancel" id="submit" class="btn btn-primary">Quay lại trang chủ</a>
+                                   <a th:href="@{/home}" type="submit" name="cancel" id="submit" class="btn btn-primary">Quay lại trang chủ</a>
                                     <a href="#" type="submit" name="changepass" class="btn btn-primary">Đổi mật khẩu</a>
                                     <button type="submit" id="submit" name="submit" class="btn btn-primary">Cập nhật</button>
                                 </div>
