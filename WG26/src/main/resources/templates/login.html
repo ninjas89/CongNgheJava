@@ -16,7 +16,7 @@
 
 <body>
 	<div th:if="${param.error} and ${param.email} == null and ${param.password} == null">
-    	<div class="alert alert-info" >Tài Khoản hoặc mật khẩu không đúng vui lòng nhập lại</div>
+    	<div class="alert alert-danger" >Tài Khoản hoặc mật khẩu không đúng vui lòng nhập lại</div>
     </div>
     <div class="container col-4 col-md-4  loginform">
         <form method="post" th:action="@{/login}" role="form">
