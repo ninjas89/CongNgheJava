@@ -289,12 +289,6 @@ ul.submenu>li:hover>a {
 .logolichsu{
   width: 15%;
 }
-/*Phần này của thangcap.html */
-.logothangcap{
-  width: 200px
-}
-/*Phần này của php*/
-.warning{
-  font-size: 20px;
-  text-align: center;
+p {
+	margin: 0;
 }

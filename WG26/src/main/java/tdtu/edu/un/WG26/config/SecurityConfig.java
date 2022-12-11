@@ -56,7 +56,7 @@ public class SecurityConfig {
 					"/register**",
 					"/home**",
 					"/login**").permitAll()
-			.anyRequest().authenticated()
+			.anyRequest().permitAll()
 			.and()
 			.formLogin(
 				form -> form
@@ -86,11 +86,10 @@ public class SecurityConfig {
 					}).permitAll()
 					
 			)
-			.rememberMe()
-			.and()
 			.logout( logout -> logout
-				.deleteCookies("JSESSIONID")
 				.logoutUrl("/logout")
+				.invalidateHttpSession(false)
+				.deleteCookies("JSESSIONID")
 				.logoutSuccessUrl("/home")
 			)
 			.sessionManagement( session -> session

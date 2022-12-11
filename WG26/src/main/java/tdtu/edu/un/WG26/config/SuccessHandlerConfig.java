@@ -19,11 +19,11 @@ public class SuccessHandlerConfig extends SavedRequestAwareAuthenticationSuccess
 		LoadUserDetail userDetail = (LoadUserDetail) authentication.getPrincipal();
 		String url = request.getContextPath();
 		System.out.println(userDetail.getRole());
-		if(userDetail.getRole() == "USER") {
-			url += "/home?user_loged";
+		if(userDetail.getRole().equals("USER")) {
+			url += "/home/login?role=2";
 		}
-		if(userDetail.getRole() == "ADMIN") {
-			url += "/home?admin_loged";
+		else if(userDetail.getRole().equals("ADMIN")) {
+			url += "/home/login?role=1";
 		}
 		else {
 			url = "/home";
