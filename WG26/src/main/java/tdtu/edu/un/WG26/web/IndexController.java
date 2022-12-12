@@ -42,7 +42,7 @@ public class IndexController {
 	
 	@GetMapping("/home/{appName}")
 	public String getAppInformation(@PathVariable("appName") String appName, Model model) {
-		App appInfo= appServices.findbyAppName(appName);
+		App appInfo= appServices.findAppByName(appName);
 		
 		model.addAttribute("appInfo", appInfo);
 		

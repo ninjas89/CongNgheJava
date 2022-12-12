@@ -11,8 +11,12 @@ public interface AppServices {
 
 	App save(AppDto appDto);
 	
-	App findbyAppName(String appName); 
+	App findAppByName(String appName); 
+
+	App findAppById(Long id);
 	
 	List<App> fetchAppEntertainmentList(String tagName);
+
+	void deleteAppById(Long appId);
 }
  

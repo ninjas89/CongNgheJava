@@ -41,5 +41,39 @@
             </div>
         </div>
     </div>
+    <div class="container" th:if="${appList}">
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">App Name</th>
+                            <th scope="col">Genre</th>
+                            <th scope="col">Tag</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="app : ${appList}">
+                            <td th:utext="${app.appName}"></td>
+                            <td th:utext="${app.genre}"></td>
+                            <td th:utext="${app.tagName}"></td>
+                            <td th:utext="${app.price}"></td>
+                            <td>
+                                <form th:action="@{/admin/edit-app?id={id}(id=${app.id})}" method="get">
+                                    <input type="submit" class="btn btn-info" value="Chỉnh sửa ứng dụng">                   
+                                </form>
+                                <br>
+                                <form th:action="@{/admin/delete-app?id={id}(id=${app.id})}" method="post">
+                                    <input type="submit" class="btn btn-danger" value="Xóa ứng dụng">                   
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -57,6 +57,12 @@ public class AdminController {
 		model.addAttribute("userList", userList);
 		return "admin";
 	}
+
+	@PostMapping("admin/delete-user")
+	public String deleteUser(@RequestParam("id") Long id) {
+		userServices.deleteUserById(id);
+		return "redirect:/admin/get-all-user";
+	}
 	
 	@GetMapping("admin/get-all-app")
 	public String getAllApp(Model model) {
@@ -64,23 +70,10 @@ public class AdminController {
 		model.addAttribute("appList", appList);
 		return "admin";
 	}
-	
-	@GetMapping("admin/get-all-card")
-	public String getAllCard(Model model) {
-		List<Card> appList = cardServices.fetchAllCard();
-		model.addAttribute("appList", appList);
-		return "admin";
-	}
 
 	@GetMapping("admin/add-app")
 	public String getAddAppPage() {
 		return "addapp";  
-	}
-
-	@PostMapping("admin/delete-user")
-	public String deleteUser(@RequestParam("id") Long id) {
-		userServices.deleteUserById(id);
-		return "redirect:/admin/get-all-user";
 	}
 
 	@PostMapping("admin/add-app")
@@ -111,5 +104,25 @@ public class AdminController {
 		appServices.save(appDto);
 		
 		return "redirect:/admin/add-app";
+	}
+
+	@GetMapping("admin/edit-app")
+	public String editAppById(@RequestParam("id") Long id, Model model) {
+		App app = appServices.findAppById(id);
+		model.addAttribute("app", app);
+		return "addapp";
+	}
+
+	@PostMapping("admin/delete-app")
+	public String deleteApp(@RequestParam("id") Long id) {
+		appServices.deleteAppById(id);
+		return "redirect:/admin/get-all-app";
+	}
+	
+	@GetMapping("admin/get-all-card")
+	public String getAllCard(Model model) {
+		List<Card> appList = cardServices.fetchAllCard();
+		model.addAttribute("appList", appList);
+		return "admin";
 	}
 }
