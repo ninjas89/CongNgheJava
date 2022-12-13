@@ -40,7 +40,8 @@ public class UserServicesImpl implements UserServices,UserDetailsService {
 				registrationDto.getFirstName(),
 				LocalDateTime.now().format(formatDateTime),
 				registrationDto.getGender(),
-				passwordHashed
+				passwordHashed,
+				"/img/user-avatar/default-avatar.jpg"
 				);
 		
 		Role role = roleRepository.findByRole("USER");
@@ -49,7 +50,6 @@ public class UserServicesImpl implements UserServices,UserDetailsService {
 		}
 		user.setRole(role);
 		return userRepository.save(user);
-		
 	}
 	
 	@Override
@@ -82,10 +82,21 @@ public class UserServicesImpl implements UserServices,UserDetailsService {
 		return userDto;
 	}
 	
-	
 	private Role checkRole() {
 		Role role = new Role();
 		role.setRole("ADMIN");
 		return roleRepository.save(role);
+	}
+
+
+	@Override
+	public void deleteUserById(Long userId) {
+		userRepository.deleteById(userId);	
+		System.out.println("Delete user successfully");
+	}
+
+	@Override
+	public User update(User user) {		
+		return userRepository.save(user);
 	}
 }

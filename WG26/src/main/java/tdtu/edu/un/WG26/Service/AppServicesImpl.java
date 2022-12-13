@@ -42,7 +42,7 @@ public class AppServicesImpl implements AppServices{
 	}
 
 	@Override
-	public App findbyAppName(String appName) {
+	public App findAppByName(String appName) {
 		return appRepository.findByAppName(appName);
 	}
 
@@ -51,5 +51,16 @@ public class AppServicesImpl implements AppServices{
 		List<App> apps = appRepository.findByTagName(tagName);
 		
 		return apps;
+	}
+
+	@Override
+	public void deleteAppById(Long appId) {
+		appRepository.deleteById(appId);
+		System.out.println("Delete app successfully");
+	}
+
+	@Override
+	public App findAppById(Long id) {
+		return appRepository.findById(id).get();
 	}
 }

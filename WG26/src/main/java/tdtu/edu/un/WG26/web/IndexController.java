@@ -1,5 +1,10 @@
 package tdtu.edu.un.WG26.web;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -14,22 +19,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import tdtu.edu.un.WG26.Model.App;
 import tdtu.edu.un.WG26.Model.User;
 import tdtu.edu.un.WG26.Service.AppServices;
 import tdtu.edu.un.WG26.Service.UserServices;
 import tdtu.edu.un.WG26.config.LoadUserDetail;
-
+import tdtu.edu.un.WG26.web.dto.UserRegistrationDto;
 
 @Controller
 @RequestMapping("/home")
 public class IndexController {
-	
+
 	@Autowired
 	private AppServices appServices;
-	
+
 	@Autowired
 	private UserServices userServices;
 	
@@ -54,7 +64,7 @@ public class IndexController {
 		App appInfo= appServices.findbyAppName(id);
 		
 		model.addAttribute("appInfo", appInfo);
-		
+
 		return "appinformation";
 	}
 	

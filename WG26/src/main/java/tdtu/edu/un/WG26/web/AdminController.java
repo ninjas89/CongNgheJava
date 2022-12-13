@@ -22,6 +22,7 @@ import tdtu.edu.un.WG26.Model.User;
 import tdtu.edu.un.WG26.Service.AdminServices;
 import tdtu.edu.un.WG26.Service.AppServices;
 import tdtu.edu.un.WG26.Service.CardServices;
+import tdtu.edu.un.WG26.Service.UserServices;
 import tdtu.edu.un.WG26.web.dto.AppDto;
 
 @Controller
@@ -35,6 +36,9 @@ public class AdminController {
 	@Autowired
 	private CardServices cardServices;
 	
+	@Autowired
+	private UserServices userServices;
+
 	private static final Path CURRENT_FOLDER = Paths.get(System.getProperty("user.dir"));
 
 	@ModelAttribute("app") 
@@ -51,20 +55,18 @@ public class AdminController {
 	public String getAllUser(Model model) {
 		List<User> userList = adminServices.fetchAllUser();
 		model.addAttribute("userList", userList);
-		System.out.println(userList);
 		return "admin";
+	}
+
+	@PostMapping("admin/delete-user")
+	public String deleteUser(@RequestParam("id") Long id) {
+		userServices.deleteUserById(id);
+		return "redirect:/admin/get-all-user";
 	}
 	
 	@GetMapping("admin/get-all-app")
 	public String getAllApp(Model model) {
 		List<App> appList = appServices.fetchAppList();
-		model.addAttribute("appList", appList);
-		return "admin";
-	}
-	
-	@GetMapping("admin/get-all-card")
-	public String getAllCard(Model model) {
-		List<Card> appList = cardServices.fetchAllCard();
 		model.addAttribute("appList", appList);
 		return "admin";
 	}
@@ -102,5 +104,25 @@ public class AdminController {
 		appServices.save(appDto);
 		
 		return "redirect:/admin/add-app";
+	}
+
+	@GetMapping("admin/edit-app")
+	public String editAppById(@RequestParam("id") Long id, Model model) {
+		App app = appServices.findAppById(id);
+		model.addAttribute("app", app);
+		return "addapp";
+	}
+
+	@PostMapping("admin/delete-app")
+	public String deleteApp(@RequestParam("id") Long id) {
+		appServices.deleteAppById(id);
+		return "redirect:/admin/get-all-app";
+	}
+	
+	@GetMapping("admin/get-all-card")
+	public String getAllCard(Model model) {
+		List<Card> appList = cardServices.fetchAllCard();
+		model.addAttribute("appList", appList);
+		return "admin";
 	}
 }
