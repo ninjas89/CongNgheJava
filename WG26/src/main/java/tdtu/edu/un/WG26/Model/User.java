@@ -69,7 +69,7 @@ public class User {
 		super();
 	}
 	
-	public User(String email, String lastName, String firstName,String createdDate, String gender, String password) {
+	public User(String email, String lastName, String firstName,String createdDate, String gender, String password, String avatarPath) {
 		super();
 		this.email = email;
 		this.lastName = lastName;
@@ -77,6 +77,7 @@ public class User {
 		this.createdDate = createdDate;
 		this.gender = gender;
 		this.password = password;
+		this.avatarPath = avatarPath;
 	}
 	
 	public Long getId() {
@@ -166,6 +167,15 @@ public class User {
 
 	public void setAvatarPath(String avatarPath) {
 		this.avatarPath = avatarPath;
+	}
+
+	
+	public List<App> getApps() {
+		return apps;
+	}
+
+	public void setApps(List<App> apps) {
+		this.apps = apps;
 	}
 
 	@Override

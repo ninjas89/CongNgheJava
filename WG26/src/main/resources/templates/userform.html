@@ -14,7 +14,8 @@
 </head>
 
 <body class="userform m-5">
-    <div class="container">
+    <div class="container" th:each="user : ${userInfo}">
+    <form method="POST" enctype="multipart/form-data" th:action="@{/home/account/} + ${user.id}" th:object="${user}">
         <div class="row gutters">
             <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 p-3">
                 <div class="card h-100">
@@ -22,10 +23,10 @@
                         <div class="account-settings  ">
                             <div class="user-profile mt-5">
                                 <div class="user-avatar ">
-                                    <img src="" alt="avatar"
+                                    <img th:src="${user.avatarPath}" alt="avatar"
                                         class="img-thumbnail mx-auto d-block userimg">
                                         <form>
-                                            <input type="file" id="myFile" name="filename">
+                                            <input type="file" id="myFile" name="avatarPath">
                                         </form>
                                 </div>
                             </div>
@@ -48,27 +49,27 @@
             <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
                 <div class="card h-100">
                     <div class="card-body">
-                        <div class="row gutters" th:each="user : ${userInfo}">
+                        <div class="row gutters">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <h6 class=" titleuserform">Thông tin tài khoản</h6>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="lastname">Họ : </label>
-                                    <input type="text" class="form-control" id="lastname" placeholder="Nhập họ của bạn" th:value="${user.firstName}">
+                                    <input type="text" class="form-control" id="lastname" name="firstName" placeholder="Nhập họ của bạn" th:value="${user.firstName}">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="firstname">Tên : </label>
-                                    <input type="text" class="form-control" id="firstname"
+                                    <input type="text" class="form-control" id="firstname" name="lastName"
                                         placeholder="Nhập tên của bạn" th:value="${user.lastName}">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="email">Email : </label>
-                                    <input type="email" class="form-control" id="email"
+                                    <input type="email" class="form-control" id="email" name="email"
                                         placeholder="Nhập email của bạn" th:value="${user.email}">
                                 </div>
                             </div>
@@ -76,12 +77,27 @@
                                 <div class="form-group">
                                     <label for="gender">Giới tính : </label>
                                     <div class="gender">
-                                        <select name="GIOITINH" id="Gender" class="form-control" th:switch="${user.gender}">
+                                        <select id="Gender" name="gender" class="form-control" th:switch="${user.gender}">
                                             <option value="Emp" disabled selected>Giới tính của bạn là ?</option>
-                                            <option label="Nam" value="Nam" name="GIOITINH" th:case="'Nam'" selected>Nam</option>
-                                            <option label="Nữ" value="Nữ" name="GIOITINH" th:case="'Nữ'" selected>Nữ</option>
-                                            <option label="Khác" value="Khác" name="GIOITINH" th:case="'Khác'" selected>Khác</option>
-                                        </select>
+													
+												<span th:case="'Nam'">
+													<option label="Nam" value="Nam" name="GIOITINH" selected>Nam</option>
+													<option label="Nữ" value="Nữ" name="GIOITINH">Nữ</option>
+													<option label="Khác" value="Khác" name="GIOITINH">Khác</option>
+												</span>
+
+												<span th:case="'Nữ'">
+													<option label="Nam" value="Nam" name="GIOITINH">Nam</option>
+													<option label="Nữ" value="Nữ" name="GIOITINH" selected>Nữ</option>
+													<option label="Khác" value="Khác" name="GIOITINH">Khác</option>
+												</span>
+
+												<span th:case="'Khác'">
+													<option label="Nam" value="Nam" name="GIOITINH">Nam</option>
+													<option label="Nữ" value="Nữ" name="GIOITINH">Nữ</option>
+													<option label="Khác" value="Khác" name="GIOITINH" selected>Khác</option>
+												</span>
+										</select>
                                     </div>
                                 </div>
                             </div>
@@ -129,6 +145,7 @@
                 </div>
             </div>
         </div>
+    </form>
     </div>
 </body>
 
