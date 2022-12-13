@@ -21,7 +21,6 @@
             <p>WG26 - For The Best Web Application</p>
         </div>
     </div>
-
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -31,61 +30,48 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
+            <div id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li><a th:href="@{/home}">Trang chủ</a></li>
-					<li><a th:href="@{/home/app-entertainment}">Giải trí</a></li>
-					<li class="active"><a th:href="@{/home/app-film}">Xem phim</a></li>
-					<li><a th:href="@{/home/app-book}">Đọc sách</a></li>
-                    <li><a href="contact.html">Liên hệ</a></li>
+                	<li th:text='${param.pid}'></li>
+                    <li><a th:href="@{/home(pid=${pid})}">Trang chủ</a></li>
+                    <li><a th:href="@{/home/games(pid=${pid})}">Giải trí</a></li>
+                    <li class="active"><a th:href="@{/home/movies(pid=${pid})}">Xem phim</a></li>
+                    <li><a th:href="@{/home/books(pid=${pid})}">Đọc sách</a></li>
+                    <li><a href="#">Liên hệ</a></li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right"
-					th:if="${param.success} != null">
-					<li><a th:href="@{/home/account}"><span class="glyphicon glyphicon-user "
-							th:text="${username}"></span></a></li>
-					<li><a th:href="@{/logout}"><span
-							class="glyphicon glyphicon-user"></span> Đăng xuất</a></li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right"
-					th:if="${param.success} == null">
-					<li><a th:href="@{/login}"><span
-							class="glyphicon glyphicon-user "></span> Đăng nhập</a></li>
-					<li><a th:href="@{/register}"><span
-							class="glyphicon glyphicon-user"></span> Đăng kí</a></li>
-				</ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a>
-                            <form action="/action_page.php">
-                                <input type="text" placeholder="Tìm kiếm ứng dụng" name="search">
-                                <button type="submit"><i class="fa fa-search"></i></button>
-                            </form>
-                        </a>
-                    </li>
-                </ul>
+                <form class="navbar-form navbar-right" th:if="${param.pid[0]} == 1" method="post" th:action="@{/logout}">
+<!-- 	                <li><a><span class="glyphicon glyphicon-user " th:text="${username}"></span></a></li>
+   	                <li>
+    					<input type="submit" value="Logout" />
+					</li> -->
+				<a class="btn btn-link" th:text="${username}"></a>
+      			<button type="submit" class="btn btn-link">Đăng xuất</button>
+                </form>
+                
+                <ul class="nav navbar-nav navbar-right" th:if="${param.pid[0]} == 0 ">
+	                <li><a th:href="@{/login}"><span class="glyphicon glyphicon-user "></span> Đăng nhập</a></li>
+	                <li><a th:href="@{/register}"><span class="glyphicon glyphicon-user"></span> Đăng kí</a></li>
+                </ul>    
             </div>
+            
         </div>
     </nav>
-
-	<div class="container">
-		<div class="row">
-			<h1 class="title">Ứng dụng xem phim đỉnh cao</h1>
-		</div>
-		<div class="row font">
-			<div class="col-sm-4" th:each="app : ${appList}">
-				<a th:href="@{/home/} + ${app.appName}">
-					<div class="panel panel-primary">
-						<div class="panel-heading" th:text="${app.appName}"></div>
-						<div class="panel-body">
-							<img th:src="${app.avatarPath}" class="img-responsive imgcmr"
-								alt="Image">
-						</div>
-					</div>
-				</a>
-			</div>
-		</div>
-	</div>
-	<br>
+    <div class="container">
+        <div class="row">
+	        <div class="col-12">
+	            <h1 class="title">Phim</h1>
+	        </div>
+	        <div class="col-12 font">
+	            <div class="col-sm-4" th:each="app : ${appList}">
+		            <a href="#">
+	                   <div class="panel">
+	                    	<div class="panel-body"><img th:src="${app.avatarPath}" class=" img-responsive imgcmr"alt="Image"></div>
+		                    <div class="panel-footer" th:text="${app.appName}"></div>
+		                </div>
+		            </a>
+	            </div>
+          </div>
+     </div>
 
 	<!--<footer class="container-fluid text-center">
         <p>Online Store Copyright</p>

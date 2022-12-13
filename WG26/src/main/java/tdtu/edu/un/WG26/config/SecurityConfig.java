@@ -23,9 +23,6 @@ public class SecurityConfig {
     @Autowired
     private UserDetailsService userDetailsService;
     
-    @Autowired
-    private SuccessHandlerConfig successHandlerConfig;
-    
     @Bean
 	public static PasswordEncoder passEncoder() {
 		return new BCryptPasswordEncoder();
@@ -48,7 +45,7 @@ public class SecurityConfig {
 				    .usernameParameter("email")
 				    .passwordParameter("password")
 					.loginProcessingUrl("/login")
-					.successHandler(successHandlerConfig)
+					.defaultSuccessUrl("/home?pid=1")
 					.failureHandler(new SimpleUrlAuthenticationFailureHandler() {
 						
 						@Override
@@ -74,7 +71,7 @@ public class SecurityConfig {
 				.logoutUrl("/logout")
 				.invalidateHttpSession(false)
 				.deleteCookies("JSESSIONID")
-				.logoutSuccessUrl("/home")
+				.logoutSuccessUrl("/home?pid=0")
 			)
 			.sessionManagement( session -> session
 				.invalidSessionUrl("/home")

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
 
 <head>
 <title>Trang chủ</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -24,7 +25,6 @@
             <p>WG26 - For The Best Web Application</p>
         </div>
     </div>
-
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -36,24 +36,30 @@
             </div>
             <div id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="home.html">Trang chủ</a></li>
-                    <li><a href="appentertainment.html">Giải trí</a></li>
-                    <li><a href="appfilm.html">Xem phim</a></li>
-                    <li><a href="appbook.html">Đọc sách</a></li>
-                    <li><a href="apppay.html">Ứng dụng trả phí</a></li>
-                    <li><a href="appfree.html">Ứng dụng miễn phí</a></li>
-                    <li><a href="contact.html">Liên hệ</a></li>
+                    <li class="active"><a href="">Trang chủ</a></li>
+                    <li><a th:href="@{/home/games(pid=${pid})}">Giải trí</a></li>
+                    <li><a th:href="@{/home/movies(pid=${pid})}">Xem phim</a></li>
+                    <li><a th:href="@{/home/books(pid=${pid})}">Đọc sách</a></li>
+                    <li><a href="#">Liên hệ</a></li>
                 </ul>
-                <form class="navbar-form navbar-right" th:if="${param.role} != null" method="post" th:action="@{/logout}">
-<!-- 	                <li><a><span class="glyphicon glyphicon-user " th:text="${username}"></span></a></li>
-   	                <li>
-    					<input type="submit" value="Logout" />
-					</li> -->
-				<a class="btn btn-link" th:text="${username}"></a>
-      			<button type="submit" class="btn btn-link">Đăng xuất</button>
-                </form>
+                <ul class="nav navbar-nav navbar-right" th:if="${param.pid[0]} == 1">
+                	<li><a th:href="@{/home/cart(pid=${pid})}"><span class="glyphicon glyphicon-shopping-cart"></span> Giỏ hàng</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span th:text="${username}"></span> <span class="caret"></span></a>
+                        <ul class="dropdown-menu" aria-labelledby="about-us">
+                            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Thông Tin Cá Nhân</a></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-list-alt"></span> Ứng Dụng Đã Tải</a></li>
+                            <li class="divider"></li>
+                            <li class="text-center">
+                                <form method="post" th:action="@{/logout}">
+                                    <button type="submit" class="btn btn-secondary">Đăng xuất</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
                 
-                <ul class="nav navbar-nav navbar-right" th:if="${param.role} == null">
+                <ul class="nav navbar-nav navbar-right" th:if="${param.pid[0]} == 0 ">
 	                <li><a th:href="@{/login}"><span class="glyphicon glyphicon-user "></span> Đăng nhập</a></li>
 	                <li><a th:href="@{/register}"><span class="glyphicon glyphicon-user"></span> Đăng kí</a></li>
                 </ul>    
@@ -63,110 +69,20 @@
     </nav>
     <div class="container">
         <div class="row">
-            <div class="col-12">
-                <h1 class="title">Ứng dụng nổi bật</h1>
-            </div>
-            <div class="col-12 font">
-            
-                <div class="col-sm-4" th:each="app : ${listApp}">
-                              <div class="panel panel-primary">
-                        <div class="panel-heading camera" th:text="${app.appName}"></div>
-                        <div class="panel-body"><img th:src="${app.avatarPath}" class=" img-responsive imgcmr"
-                                alt="Image">
-                        </div>
-                        <div class="panel-footer " th:text="${app.description}"></div>
-                    </div>
-    
-                </div>
-                <div class="col-sm-4">
-                    <div class="panel panel-danger">
-                        <div class="panel-heading">Hiệp Khách</div>
-                        <div class="panel-body"><img src="../pics/hiepkhach.png" class="img-responsive imgcmr" alt="Image">
-                        </div>
-                        <div class="panel-footer">Game mobile đỉnh cao năm 2021</div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="panel panel-success">
-                        <div class="panel-heading">Alice in Wonderland</div>
-                        <div class="panel-body"><img src="../pics/alicesquare.png" class="img-responsive imgcmr"
-                                alt="Image"></div>
-                        <div class="panel-footer">Câu chuyện của Alice ở xứ thần kỳ</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-12">
-                <h1 class="title">Ứng dụng nổi bật</h1>
-            </div>
-            <div class="col-12 font">
-            
-                <div class="col-sm-4" th:each="app : ${listApp}">
-                              <div class="panel panel-primary">
-                        <div class="panel-heading camera" th:text="${app.appName}"></div>
-                        <div class="panel-body"><img th:src="${app.avatarPath}" class=" img-responsive imgcmr"
-                                alt="Image">
-                        </div>
-                        <div class="panel-footer " th:text="${app.description}"></div>
-                    </div>
-    
-                </div>
-                <div class="col-sm-4">
-                    <div class="panel panel-danger">
-                        <div class="panel-heading">Hiệp Khách</div>
-                        <div class="panel-body"><img src="../pics/hiepkhach.png" class="img-responsive imgcmr" alt="Image">
-                        </div>
-                        <div class="panel-footer">Game mobile đỉnh cao năm 2021</div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="panel panel-success">
-                        <div class="panel-heading">Alice in Wonderland</div>
-                        <div class="panel-body"><img src="../pics/alicesquare.png" class="img-responsive imgcmr"
-                                alt="Image"></div>
-                        <div class="panel-footer">Câu chuyện của Alice ở xứ thần kỳ</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-12">
-                <h1 class="title">Ứng dụng nổi bật</h1>
-            </div>
-            <div class="col-12 font">
-            
-                <div class="col-sm-4" th:each="app : ${listApp}">
-                              <div class="panel panel-primary">
-                        <div class="panel-heading camera" th:text="${app.appName}"></div>
-                        <div class="panel-body"><img th:src="${app.avatarPath}" class=" img-responsive imgcmr"
-                                alt="Image">
-                        </div>
-                        <div class="panel-footer " th:text="${app.description}"></div>
-                    </div>
-    
-                </div>
-                <div class="col-sm-4">
-                    <div class="panel panel-danger">
-                        <div class="panel-heading">Hiệp Khách</div>
-                        <div class="panel-body"><img src="../pics/hiepkhach.png" class="img-responsive imgcmr" alt="Image">
-                        </div>
-                        <div class="panel-footer">Game mobile đỉnh cao năm 2021</div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="panel panel-success">
-                        <div class="panel-heading">Alice in Wonderland</div>
-                        <div class="panel-body"><img src="../pics/alicesquare.png" class="img-responsive imgcmr"
-                                alt="Image"></div>
-                        <div class="panel-footer">Câu chuyện của Alice ở xứ thần kỳ</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	        <div class="col-12">
+	            <h1 class="title">Ứng Dụng Phổ Biến</h1>
+	        </div>
+	        <div class="col-12 font">
+	            <div class="col-sm-4" th:each="app : ${appList}">
+		            <a th:href="@{/home/detail(pid=${pid},id=${app.appName})}">
+	                   <div class="panel">
+	                    	<div class="panel-body"><img th:src="${app.avatarPath}" class=" img-responsive imgcmr"alt="Image"></div>
+		                    <div class="panel-footer" th:text="${app.appName}"></div>
+		                </div>
+		            </a>
+	            </div>
+          </div>
+     </div>
 
     <!-- <footer class="container-fluid text-center">
         <p>Online Store Copyright</p>

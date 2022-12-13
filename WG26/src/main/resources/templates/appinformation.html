@@ -17,20 +17,13 @@
 <body class="userform m-5">
 
     <div class="container" th:each="app : ${appInfo}">
-
         <div class="row gutters">
-
-            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 p-3">
-
-                <div class="card h-100">
-                    <div class="row">
-                        <img src="/img/logo2.png" class="logoappinfor ml-4 m-auto ">
-                    </div>
-
-                    <div class="card-body">
-                        <div class="account-settings  ">
+            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 p-3" >
+                <div class="card h-100 ">
+                    <div class="card-body ">
+                        <div class="account-settings ">
                             <div class="user-profile mt-5">
-                                <div class="user-avatar ">
+                                <div class="user-avatar">
                                     <img th:src="${app.avatarPath}" alt="avatar" class="
                                     d-block appimg m-auto">
                                 </div>
@@ -40,7 +33,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+            <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
                 <div class="card h-100">
                     <div class="card-body">
                         <div class="row gutters">
@@ -48,12 +41,10 @@
                                 <h6 class=" titleuserform">Thông tin ứng dụng</h6>
                             </div>
 
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                            <div class="col-12">
                                 <div class="form-group mt-5 ">
                                     <h1 th:text="${app.appName}"></h1>
                                 </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
@@ -65,51 +56,21 @@
                             </div>
                         </div>
                         <div class="row gutters">
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <h3>Đánh giá :
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star"></span>
-                                </h3>
-
-                            </div>
 
 
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                            <div class="col-12">
                                 <div class="form-group">
-                                    <h3>Giá tiền: <span th:text="${app.price}"></span></h3>
+                                    <h3>Giá tiền: <span th:text="${app.price}" class="description"></span> <span class="description"> VND</span></h3>
                                 </div>
                             </div>
 
                         </div>
-                        <div class="row gutters">
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <h3>Nhận xét : </h3>
-                                    <div>
-                                        <p>"Cái gì càng được kể nhẹ tênh thì lại càng đau đớn... Đẹp đẽ, đau đớn và dịu
-                                            dàng"</p>
-                                        <p>"Phim không làm tôi khóc, chỉ hơi suy tư. Nhưng tôi nể sự nghiêm túc và chỉn
-                                            chu
-                                            của đạo diễn lẫn êkip"</p>
-                                        <p>"Phim chậm. Cảm giác trải từng trang sách ra màn ảnh. Thỉnh thoảng lại như
-                                            xem
-                                            video ca nhạc có cốt truyện"</p>
-                                    </div>
 
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row gutters">
+                        <div class="row">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <div class="text-center">
-                                    <button type="button" id="thanhtoan" class="btn btn-primary mr-5 pay">Thanh
-                                        toán</button>
-                                    <button type="button" id="thanhtoan" class="btn btn-primary mr-5 pay">Tải
-                                        xuống</button>
+                                <div class="text-right">
+                                    <button type="button" id="thanhtoan" class="btn btn-primary mr-5 pay">Thêm Giỏ Hàng</button>
+                                    <button type="button" id="thanhtoan" class="btn btn-primary mr-5 pay">Tải xuống</button>
                                 </div>
                             </div>
                         </div>

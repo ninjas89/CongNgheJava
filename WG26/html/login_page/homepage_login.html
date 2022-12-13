@@ -38,29 +38,22 @@
                     <li><a href="#">Giải trí</a></li>
                     <li><a href="#">Xem phim</a></li>
                     <li><a href="#">Đọc sách</a></li>
-                    <li><a href="#">Ứng dụng trả phí</a></li>
-                    <li><a href="#">Ứng dụng miễn phí</a></li>
                     <li><a href="#">Lịch sử mua hàng</a></li>
                     <li><a href="#">Liên hệ</a></li>
                 </ul>
 
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a>
-                            <form action="/action_page.php">
-                                <button type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                            </form>
-                        </a>
-                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About Us <span class="caret"></span></a>
+                        <ul class="dropdown-menu" aria-labelledby="about-us">
+                            <li><a href="#"><span class="glyphicon glyphicon-user "></span>  Thông Tin Cá Nhân</a></li>
+                            <li><a href="#">Lịch Sử Mua Hàng</a></li>
+                            <li class="divider"></li>
 
-                    <li><a href="#" class="dropdown-menu" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> Tài khoản</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#" class="dropdown-item">Thông tin cá nhân</a></li>
-                            <li><a href="#" class="dropdown-item">Nạp tiền</a></li>
-                            <li><a href="#" class="dropdown-item">Lịch sử giao dịch</a></li>
-                            <li><a href="#" class="dropdown-item">Đăng xuất</a></li>
-                          
+                            <form th:if="${param.pid[0]} == 1" method="post" th:action="@{/logout}">
+                                <button type="submit" class="btn btn-secondary">Đăng xuất</button>
+                            </form>
                         </ul>
                     </li>
                     <li><a href="#"><span class="glyphicon glyphicon-off"></span> Giỏ hàng</a></li>
