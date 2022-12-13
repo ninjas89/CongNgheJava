@@ -116,29 +116,38 @@ public class IndexController {
 								@RequestParam("email") String email,
 								@RequestParam("gender") String gender,			
 								@RequestParam("avatarPath") MultipartFile avatarPath) throws IOException {
-
-		Path staticPath = Paths.get("src/main/resources/static");
-        Path imagePath = Paths.get("img/user-avatar");
-        
-        if (!Files.exists(CURRENT_FOLDER.resolve(staticPath).resolve(imagePath))) {
-            Files.createDirectories(CURRENT_FOLDER.resolve(staticPath).resolve(imagePath));
-        }
-        
-        Path file = CURRENT_FOLDER.resolve(staticPath).resolve(imagePath).resolve(avatarPath.getOriginalFilename());
-        
-        try (OutputStream os = Files.newOutputStream(file)) {
-            os.write(avatarPath.getBytes());
-        }
 		
-		User user_data = userServices.findByEmail(email);
-
+		User user_data = userServices.findByEmail(email); //tim user trong database qua email
+		
 		System.out.println("User data: " + user_data);
 		
-		user_data.setFirstName(firstName);
-		user_data.setLastName(lastName);
-		user_data.setEmail(email);
-		user_data.setGender(gender);
-		user_data.setAvatarPath("/img/user-avatar/" + avatarPath.getOriginalFilename());
+		if ("" == avatarPath.getOriginalFilename()) {//neu nguoi dung khong thay doi avatar mac dinh
+			user_data.setFirstName(firstName);
+			user_data.setLastName(lastName);
+			user_data.setEmail(email);
+			user_data.setGender(gender);
+		}
+		else {// nguoi dung thay doi avatar
+
+			Path staticPath = Paths.get("src/main/resources/static");
+			Path imagePath = Paths.get("img/user-avatar");
+
+			if (!Files.exists(CURRENT_FOLDER.resolve(staticPath).resolve(imagePath))) {
+				Files.createDirectories(CURRENT_FOLDER.resolve(staticPath).resolve(imagePath));
+			}
+
+			Path file = CURRENT_FOLDER.resolve(staticPath).resolve(imagePath).resolve(avatarPath.getOriginalFilename());
+
+			try (OutputStream os = Files.newOutputStream(file)) {
+				os.write(avatarPath.getBytes());
+			}
+
+			user_data.setFirstName(firstName);
+			user_data.setLastName(lastName);
+			user_data.setEmail(email);
+			user_data.setGender(gender);
+			user_data.setAvatarPath("/img/user-avatar/" + avatarPath.getOriginalFilename());
+		}
 		
 		System.out.println("User data updated: " + user_data);
 		/* userServices.update(user); */
