@@ -9,16 +9,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/css/style.css">
-
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
 
     <div class="homepage">
         <div class=" text-center homepageborder">
-            <img src="../pics/logo2.png" class="mt-3 logohomepage">
-            <p>Con người trong nghịch cảnh không được phép chịu đầu hàng</p>
+            <img src="/src/main/resources/static/img/logo2.png" class="mt-3 logohomepage">
         </div>
     </div>
     
@@ -45,18 +43,17 @@
 
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About Us <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User<span class="caret"></span></a>
                         <ul class="dropdown-menu" aria-labelledby="about-us">
                             <li><a href="#"><span class="glyphicon glyphicon-user "></span>  Thông Tin Cá Nhân</a></li>
-                            <li><a href="#">Lịch Sử Mua Hàng</a></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-list-alt"></span>  Lịch Sử Mua Hàng</a></li>
                             <li class="divider"></li>
-
                             <form th:if="${param.pid[0]} == 1" method="post" th:action="@{/logout}">
                                 <button type="submit" class="btn btn-secondary">Đăng xuất</button>
                             </form>
                         </ul>
                     </li>
-                    <li><a href="#"><span class="glyphicon glyphicon-off"></span> Giỏ hàng</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Giỏ hàng</a></li>
                 </ul>
 
                 <!-- <ul class="nav navbar-nav navbar-right findapp">
