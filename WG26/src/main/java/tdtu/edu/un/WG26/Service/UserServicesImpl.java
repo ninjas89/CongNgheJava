@@ -16,6 +16,7 @@ import tdtu.edu.un.WG26.Model.User;
 import tdtu.edu.un.WG26.Repository.RoleRepository;
 import tdtu.edu.un.WG26.Repository.UserRepository;
 import tdtu.edu.un.WG26.config.LoadUserDetail;
+import tdtu.edu.un.WG26.web.dto.UserChangePassDTO;
 import tdtu.edu.un.WG26.web.dto.UserRegistrationDto;
 
 @Service
@@ -99,4 +100,14 @@ public class UserServicesImpl implements UserServices,UserDetailsService {
 	public User update(User user) {		
 		return userRepository.save(user);
 	}
+
+	@Override
+	public User changePassword(UserChangePassDTO userChangePassDTO) {
+		String passwordHashed = passEncoder.encode(userChangePassDTO.getNewPassword());
+		User user = findByEmail(userChangePassDTO.getEmail());
+		user.setPassword(passwordHashed);
+		return userRepository.save(user);
+	}
+	
+	
 }

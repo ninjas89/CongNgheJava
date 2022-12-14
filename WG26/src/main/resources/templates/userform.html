@@ -15,28 +15,20 @@
 
 <body class="userform m-5">
     <div class="container" th:each="user : ${userInfo}">
-    <form method="POST" enctype="multipart/form-data" th:action="@{/home/account/} + ${user.id}" th:object="${user}">
+    <form method="POST" enctype="multipart/form-data" th:action="@{/home/user}" th:object="${user}">
         <div class="row gutters">
             <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 p-3">
                 <div class="card h-100">
                     <div class="card-body">
                         <div class="account-settings  ">
                             <div class="user-profile mt-5">
-                                <div class="user-avatar ">
+                                <div class="user-avatar">
                                     <img th:src="${user.avatarPath}" alt="avatar"
                                         class="img-thumbnail mx-auto d-block userimg">
                                         <form>
                                             <input type="file" id="myFile" name="avatarPath">
                                         </form>
                                 </div>
-                            </div>
-                            <div class="user-profile">
-                                <form>
-                                    <div>
-                                        <button type="submit" id="submit" name="submit"
-                                            class="btn btn-primary btn-lg ml-2  ">Thăng cấp</button>
-                                    </div>
-                                </form>
                             </div>
 
                             <div class="row">
@@ -56,21 +48,39 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="lastname">Họ : </label>
-                                    <input type="text" class="form-control" id="lastname" name="firstName" placeholder="Nhập họ của bạn" th:value="${user.firstName}">
+                                    <input type="text" class="form-control" id="lastname" name="firstName" placeholder="Nhập họ của bạn" th:value="${user.firstName}" readonly="readonly">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="firstname">Tên : </label>
                                     <input type="text" class="form-control" id="firstname" name="lastName"
-                                        placeholder="Nhập tên của bạn" th:value="${user.lastName}">
+                                        placeholder="Nhập tên của bạn" th:value="${user.lastName}" readonly="readonly">
                                 </div>
                             </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                            <div class="col-12">
                                 <div class="form-group">
                                     <label for="email">Email : </label>
                                     <input type="email" class="form-control" id="email" name="email"
                                         placeholder="Nhập email của bạn" th:value="${user.email}" readonly="readonly">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="money">Số tiền (VNĐ) :</label>
+                                    <input type="text" class="form-control" th:value="${user.cashAmount}" readonly="readonly">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <h6 class="mt-3 mb-2 ">Thông tin cá nhân ( nếu có )</h6>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="phonenumber">Số điện thoại : </label>
+                                    <input type="text" class="form-control" id="phonenumber"
+                                        placeholder="Nhập số điện thoại của bạn" name="phoneNumber" th:value="${user.phoneNumber}">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -95,7 +105,6 @@
 												<span th:case="'Khác'">
 													<option label="Nam" value="Nam" name="GIOITINH">Nam</option>
 													<option label="Nữ" value="Nữ" name="GIOITINH">Nữ</option>
-													<option label="Khác" value="Khác" name="GIOITINH" selected>Khác</option>
 												</span>
 										</select>
                                     </div>
@@ -104,39 +113,8 @@
                         </div>
                         <div class="row gutters">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <h6 class="mt-3 mb-2 ">Thông tin cá nhân ( nếu có )</h6>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label for="birthday">Ngày sinh : </label>
-                                    <input type="date" class="form-control" id="ngaysinh">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label for="phonenumber">Số điện thoại : </label>
-                                    <input type="text" class="form-control" id="phonenumber"
-                                        placeholder="Nhập số điện thoại của bạn">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label for="money">Sồ tiền (VNĐ) :</label>
-                                    <input type="text" class="form-control" id="money">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label for="role">Role : </label>
-                                    <input type="text" class="form-control" id="role">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row gutters">
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="text-right">
-                                   <a th:href="@{/home}" type="submit" name="cancel" id="submit" class="btn btn-primary">Quay lại trang chủ</a>
-                                    <a href="#" type="submit" name="changepass" class="btn btn-primary">Đổi mật khẩu</a>
+                                    <a th:href="@{/home(pid=1)}" type="submit" name="changepass" class="btn btn-primary">Quay lại</a>
                                     <button type="submit" id="submit" name="submit" class="btn btn-primary">Cập nhật</button>
                                 </div>
                             </div>

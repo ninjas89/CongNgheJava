@@ -36,7 +36,7 @@
             </div>
             <div id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="">Trang chủ</a></li>
+                    <li class="active"><a href="#">Trang chủ</a></li>
                     <li><a th:href="@{/home/games(pid=${pid})}">Giải trí</a></li>
                     <li><a th:href="@{/home/movies(pid=${pid})}">Xem phim</a></li>
                     <li><a th:href="@{/home/books(pid=${pid})}">Đọc sách</a></li>
@@ -47,7 +47,8 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span th:text="${username}"></span> <span class="caret"></span></a>
                         <ul class="dropdown-menu" aria-labelledby="about-us">
-                            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Thông Tin Cá Nhân</a></li>
+                            <li><a th:href="@{/home/user}"><span class="glyphicon glyphicon-user"></span> Thông Tin Cá Nhân</a></li>
+                            <li><a th:href="@{/home/changepass}"><span class="glyphicon glyphicon-refresh"></span> Đôi Mật Khẩu</a></li>
                             <li><a href="#"><span class="glyphicon glyphicon-list-alt"></span> Ứng Dụng Đã Tải</a></li>
                             <li class="divider"></li>
                             <li class="text-center">

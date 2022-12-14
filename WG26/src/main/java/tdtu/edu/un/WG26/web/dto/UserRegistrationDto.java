@@ -33,7 +33,6 @@ public class UserRegistrationDto {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.gender = gender;
-		this.email = email;
 		this.password = password;
 		this.confirmPassword = confirmPassword;
 	}

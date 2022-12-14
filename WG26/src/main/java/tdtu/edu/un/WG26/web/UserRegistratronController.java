@@ -36,17 +36,17 @@ public class UserRegistratronController {
 		return new UserRegistrationDto();
 	}
 	
-	@GetMapping
+	@RequestMapping("")
 	public String getRegister() {
 		return "register";
 	}
 	
-	@PostMapping
+	@PostMapping("")
 	public String postRegister(@Validated @ModelAttribute("user") UserRegistrationDto registrationDto, BindingResult result) {
         if(result.hasErrors()){
         	System.out.println(result.getAllErrors());
         	System.out.println(result.getGlobalErrorCount());
-            return "register?error";
+            return "register";
         }
 		else {
 			userServices.save(registrationDto);
