@@ -25,49 +25,7 @@
             <p>WG26 - For The Best Web Application</p>
         </div>
     </div>
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div id="myNavbar">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Trang chủ</a></li>
-                    <li><a th:href="@{/home/games(pid=${pid})}">Giải trí</a></li>
-                    <li><a th:href="@{/home/movies(pid=${pid})}">Xem phim</a></li>
-                    <li><a th:href="@{/home/books(pid=${pid})}">Đọc sách</a></li>
-                    <li><a href="#">Liên hệ</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right" th:if="${param.pid[0]} == 1">
-                	<li><a th:href="@{/home/cart(pid=${pid})}"><span class="glyphicon glyphicon-shopping-cart"></span> Giỏ hàng</a></li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span th:text="${username}"></span> <span class="caret"></span></a>
-                        <ul class="dropdown-menu" aria-labelledby="about-us">
-                            <li><a th:href="@{/home/user}"><span class="glyphicon glyphicon-user"></span> Thông Tin Cá Nhân</a></li>
-                            <li><a th:href="@{/home/changepass}"><span class="glyphicon glyphicon-refresh"></span> Đôi Mật Khẩu</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-list-alt"></span> Ứng Dụng Đã Tải</a></li>
-                            <li class="divider"></li>
-                            <li class="text-center">
-                                <form method="post" th:action="@{/logout}">
-                                    <button type="submit" class="btn btn-secondary">Đăng xuất</button>
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                
-                <ul class="nav navbar-nav navbar-right" th:if="${param.pid[0]} == 0 ">
-	                <li><a th:href="@{/login}"><span class="glyphicon glyphicon-user "></span> Đăng nhập</a></li>
-	                <li><a th:href="@{/register}"><span class="glyphicon glyphicon-user"></span> Đăng kí</a></li>
-                </ul>    
-            </div>
-            
-        </div>
-    </nav>
+    <div th:replace="fragments/header :: header">...</div>
     <div class="container">
         <div class="row">
 	        <div class="col-12">

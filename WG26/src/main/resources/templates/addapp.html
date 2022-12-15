@@ -11,13 +11,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <title>Upload ứng dụng</title>
     <link rel="stylesheet" href="../css/style.css">
-
-
 <body>
     <div class="container col-4 col-md-4 regisform">
         <form method="POST" enctype="multipart/form-data" th:action="@{/admin/add-app}" th:object="${app}">
             <div class="row">
-                <img src="/src/main/resources/static/img/logo2.png" class="logoreg m-auto p-2">
+                <img src="/img/logo2.png" class="logoreg m-auto p-2">
             </div>
 
             <div class="form-row mb-3">
@@ -27,7 +25,7 @@
             <div class="form-row">
                 <div class="col">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Tên ứng dụng" id="nameapp" name="appName">
+                        <input type="text" th:text="${app} ? app.appName : ''" class="form-control" placeholder="Tên ứng dụng" id="nameapp" name="appName">
                     </div>
                 </div>
             </div>
@@ -35,7 +33,7 @@
             <div class="form-row">
                 <div class="col">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Tên nhà phát hành" id="publisher" name="publisher">
+                        <input type="text" th:text="${app} ? app.publisher : ''" class="form-control" placeholder="Tên nhà phát hành" id="publisher" name="publisher">
                     </div>
                 </div>
             </div>
@@ -45,7 +43,9 @@
                     <div class="form-group">
                         <div class="gender">
                             <select id="category" name="genre" class="form-control">
-                                <option value="Emp" name='LOAI' disabled selected>Vui lòng chọn loại</option>
+                                <div th:if="${app}">
+                                    <option th:value="${app.genre}" name='LOAI'></option>
+                                </div>
                                 <option label="Giải trí" value="game" name='LOAI' >Giải trí</option>
                                 <option label="Xem phim" value="phim" name='LOAI' >Xem phim</option>
                                 <option label="Đọc sách" value="sach" name='LOAI' >Đọc sách</option>
@@ -58,7 +58,7 @@
             <div class="form-row">
                 <div class="col">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Thể loại" id="theloai" name="tagName">
+                        <input type="text" th:text="${app} ? app.tagName : ''" class="form-control" placeholder="Thể loại" id="theloai" name="tagName">
                     </div>
                 </div>
             </div>
@@ -66,14 +66,14 @@
             <div class="form-row">
                 <div class="col">
                     <div class="form-group">
-                        <input type="text" class="form-control appdescription" placeholder="Mô tả" id="description" name="description">
+                        <input type="text" th:text="${app} ? app.description : ''" class="form-control appdescription" placeholder="Mô tả" id="description" name="description">
                     </div>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Giá thành" id="price" name="price">
+                        <input type="text" th:text="${app} ? app.price : ''" class="form-control" placeholder="Giá thành" id="price" name="price">
                     </div>
                 </div>
             </div>
