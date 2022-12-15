@@ -4,10 +4,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import tdtu.edu.un.WG26.Validation.PasswordCompare;
-import tdtu.edu.un.WG26.Validation.PasswordValidated;
 import tdtu.edu.un.WG26.config.LoadUserDetail;
 
 public class UserChangePassDTO {

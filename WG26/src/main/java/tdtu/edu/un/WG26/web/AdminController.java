@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -107,7 +108,8 @@ public class AdminController {
 	}
 
 	@GetMapping("admin/edit-app")
-	public String editAppById(@RequestParam("id") Long id, Model model) {
+	public String editAppById(@PathVariable("id") Long id, Model model) {
+		System.out.println(id);
 		App app = appServices.findAppById(id);
 		model.addAttribute("app", app);
 		return "addapp";
