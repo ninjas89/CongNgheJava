@@ -47,8 +47,8 @@ public class IndexController {
 			@RequestParam("pid") int pid) {
 		if (userDetail != null) {
 			String username = userDetail.getUsername();
-			model.addAttribute("username", username);
-		} else if (userDetail == null && pid == 1) {
+			model.addAttribute("userName", username);
+		} else if (userDetail == null && (pid == 1 || pid == 2)) {
 			return "redirect:/home?pid=0";
 		}
 		List<App> appList = appServices.fetchAppList();
@@ -73,8 +73,8 @@ public class IndexController {
 		String tagName = "game";
 		if (userDetail != null) {
 			String username = userDetail.getUsername();
-			model.addAttribute("username", username);
-		} else if (userDetail == null && pid == 1) {
+			model.addAttribute("userName", username);
+		} else if (userDetail == null && (pid == 1 || pid == 2)) {
 			return "redirect:/games?pid=0";
 		}
 		List<App> appList = appServices.fetchAppEntertainmentList(tagName);
@@ -89,8 +89,8 @@ public class IndexController {
 		String tagName = "sach";
 		if (userDetail != null) {
 			String username = userDetail.getUsername();
-			model.addAttribute("username", username);
-		} else if (userDetail == null && pid == 1) {
+			model.addAttribute("userName", username);
+		} else if (userDetail == null && (pid == 1 || pid == 2)) {
 			return "redirect:/books?pid=0";
 		}
 		List<App> appList = appServices.fetchAppEntertainmentList(tagName);
@@ -105,8 +105,8 @@ public class IndexController {
 		String tagName = "phim";
 		if (userDetail != null) {
 			String username = userDetail.getUsername();
-			model.addAttribute("username", username);
-		} else if (userDetail == null && pid == 1) {
+			model.addAttribute("userName", username);
+		} else if (userDetail == null && (pid == 1 || pid == 2)) {
 			return "redirect:/movies?pid=0";
 		}
 		List<App> appList = appServices.fetchAppEntertainmentList(tagName);
@@ -121,8 +121,8 @@ public class IndexController {
 		String tagName = "phim";
 		if (userDetail != null) {
 			String username = userDetail.getUsername();
-			model.addAttribute("username", username);
-		} else if (userDetail == null && pid == 1) {
+			model.addAttribute("userName", username);
+		} else if (userDetail == null && (pid == 1 || pid == 2)) {
 			return "redirect:/movies?pid=0";
 		}
 		List<App> appList = appServices.fetchAppEntertainmentList(tagName);
@@ -132,15 +132,16 @@ public class IndexController {
 	}
 
 	@RequestMapping("/user")
-	public String getUserInfo(@AuthenticationPrincipal LoadUserDetail userDetail, Model model) {
+	public String getUserInfo(@AuthenticationPrincipal LoadUserDetail userDetail, Model model, @RequestParam("pid") int pid) {
 		if (userDetail == null) {
 			return "redirect:/home?pid=0";
 		} else {
-			String email = userDetail.getUsername();
+			String email = userDetail.getEmail();
 
 			User user = userServices.findByEmail(email);
 
 			model.addAttribute("userInfo", user);
+			model.addAttribute("pid", pid);
 
 			return "userform";
 		}
@@ -148,20 +149,22 @@ public class IndexController {
 
 	@PostMapping("/user")
 	public String updateUserInfo(@AuthenticationPrincipal LoadUserDetail userDetail,
+			Model model,
 			@RequestParam("gender") String gender,
 			@RequestParam("phoneNumber") String phoneNumber,
-			@RequestParam("avatarPath") MultipartFile avatarPath) throws IOException {
+			@RequestParam("avatarPath") MultipartFile avatarPath, 
+			@RequestParam("pid") int pid) throws IOException {
 		if (userDetail == null) {
 			return "redirect:/home?pid=0";
 		} else {
-			User user_data = userServices.findByEmail(userDetail.getUsername()); // tim user trong database qua email
+			User user = userServices.findByEmail(userDetail.getEmail());
 
-			System.out.println("User data: " + user_data);
+			System.out.println("User data: " + user);
 
-			if ("" == avatarPath.getOriginalFilename()) {// neu nguoi dung khong thay doi avatar mac dinh
-				user_data.setPhoneNumber(phoneNumber);
-				user_data.setGender(gender);
-			} else {// nguoi dung thay doi avatar
+			if ("" == avatarPath.getOriginalFilename()) {
+				user.setPhoneNumber(phoneNumber);
+				user.setGender(gender);
+			} else {
 				Path staticPath = Paths.get("src/main/resources/static");
 				Path imagePath = Paths.get("img/user-avatar");
 				if (!Files.exists(CURRENT_FOLDER.resolve(staticPath).resolve(imagePath))) {
@@ -172,17 +175,18 @@ public class IndexController {
 				try (OutputStream os = Files.newOutputStream(file)) {
 					os.write(avatarPath.getBytes());
 				}
-				user_data.setPhoneNumber(phoneNumber);
-				user_data.setGender(gender);
-				user_data.setAvatarPath("/img/user-avatar/" + avatarPath.getOriginalFilename());
+				user.setPhoneNumber(phoneNumber);
+				user.setGender(gender);
+				user.setAvatarPath("/img/user-avatar/" + avatarPath.getOriginalFilename());
 			}
-			System.out.println("User data updated: " + user_data);
-			userServices.update(user_data);
-			return "redirect:/home/user";
+			System.out.println("User data updated: " + user);
+			model.addAttribute("pid", pid);
+			userServices.update(user);
+			return "redirect:/home/user?pid=" + pid;
 		}
 	}
 
-	@RequestMapping("/changepass")
+	@RequestMapping("/change-pass")
 	public String getChangePassPage(@AuthenticationPrincipal LoadUserDetail userDetail, Model model) {
 		if (userDetail == null) {
 			return "redirect:/home?pid=0";
@@ -191,28 +195,28 @@ public class IndexController {
 		}
 	}
 
-	@PostMapping("/changepass")
+	@PostMapping("/change-pass")
 	public String updateUserInfo(@AuthenticationPrincipal LoadUserDetail userDetail,
 			@Validated @ModelAttribute("user") UserChangePassDTO userChangePassDTO, BindingResult result) {
 		if (userDetail == null) {
 			return "redirect:/home?pid=0";
 		} else {
-			System.out.println(userDetail.getUsername());
-			userChangePassDTO.setEmail(userDetail.getUsername());
-			System.out.println(userChangePassDTO);
+			userChangePassDTO.setEmail(userDetail.getEmail());
 			userServices.changePassword(userChangePassDTO);
 			return "redirect:/home/changepass?success";
 		}
 	}
 
 	@GetMapping("/about")
-	public String getAboutPage(@AuthenticationPrincipal LoadUserDetail userDetail, Model model, @RequestParam("pid") int pid) {
+	public String getAboutPage(@AuthenticationPrincipal LoadUserDetail userDetail, Model model,
+			@RequestParam("pid") int pid) { 
 		if (userDetail != null) {
 			String username = userDetail.getUsername();
-			model.addAttribute("username", username);
-		} else if (userDetail == null && pid == 1) {
+			model.addAttribute("userName", username);
+		} else if (userDetail == null && (pid == 1 || pid == 2)) {
 			return "redirect:/about?pid=0";
 		}
-		return "about";
+		model.addAttribute("pid", pid);
+		return "about"; 
 	}
 }

@@ -19,20 +19,26 @@
                 </div>
                 <div id="myNavbar">
                     <ul class="nav navbar-nav">
-                        <li><a href="@{/home(pid=${pid})}">Trang chủ</a></li>
+                        <li><a th:href="@{/home(pid=${pid})}">Trang chủ</a></li> 
                         <li><a th:href="@{/home/games(pid=${pid})}">Giải trí</a></li>
                         <li><a th:href="@{/home/movies(pid=${pid})}">Xem phim</a></li>
                         <li><a th:href="@{/home/books(pid=${pid})}">Đọc sách</a></li>
-                        <li><a th:href="@{/home/about(pid=${pid})}">Liên hệ</a></li>
+                        <li><a th:href="@{/home/about(pid=${pid})}">Liên hệ</a></li> 
                     </ul>
-                    <ul class="nav navbar-nav navbar-right" th:if="${param.pid[0]} == 1">
-                        <li><a th:href="@{/home/cart(pid=${pid})}"><span class="glyphicon glyphicon-shopping-cart"></span> Giỏ hàng</a></li>
+                    <ul class="nav navbar-nav navbar-right" th:if="${param.pid[0]} == 1 or ${param.pid[0]} == 2">
+                        <li>
+                            <a th:href="@{/home/cart(pid=${pid})}" th:if="${param.pid[0]} == 1"><span class="glyphicon glyphicon-shopping-cart" ></span> Giỏ hàng</a>
+                            <a href="#" th:if="${param.pid[0]} == 2" ><span class="glyphicon glyphicon-shopping-cart"></span> Thêm Ứng Dụng</a>              	
+                        </li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span th:text="${username}"></span> <span class="caret"></span></a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span th:text="${userName}"></span> <span class="caret"></span></a>
                             <ul class="dropdown-menu" aria-labelledby="about-us">
-                                <li><a th:href="@{/home/user}"><span class="glyphicon glyphicon-user"></span> Thông Tin Cá Nhân</a></li>
-                                <li><a th:href="@{/home/changepass}"><span class="glyphicon glyphicon-refresh"></span> Đôi Mật Khẩu</a></li>
-                                <li><a href="#"><span class="glyphicon glyphicon-list-alt"></span> Ứng Dụng Đã Tải</a></li>
+                                <li><a th:href="@{/home/user(pid=${pid})}"><span class="glyphicon glyphicon-user"></span> Thông Tin Cá Nhân</a></li>
+                                <li><a th:href="@{/home/change-pass}"><span class="glyphicon glyphicon-refresh"></span> Đôi Mật Khẩu</a></li>
+                                <li th:if="${param.pid[0]} == 2"><a th:href="@{/admin/get-all-user}"><span class="glyphicon glyphicon-list"></span> Quản Lý Tài Khoản</a></li>
+                                <li th:if="${param.pid[0]} == 2"><a th:href="@{/admin/get-all-app}"><span class="glyphicon glyphicon-tasks"></span> Quản Lý Ứng dụng</a></li>
+                                <li><a th:href="@{/home/change-pass}"><span class="glyphicon glyphicon-usd"></span> Nạp Tiền</a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-list-alt"></span> Lịch Sử Mua Hàng</a></li>
                                 <li class="divider"></li>
                                 <li class="text-center">
                                     <form method="post" th:action="@{/logout}">
@@ -42,13 +48,11 @@
                             </ul>
                         </li>
                     </ul>
-                    
                     <ul class="nav navbar-nav navbar-right" th:if="${param.pid[0]} == 0 ">
                         <li><a th:href="@{/login}"><span class="glyphicon glyphicon-user "></span> Đăng nhập</a></li>
                         <li><a th:href="@{/register}"><span class="glyphicon glyphicon-user"></span> Đăng kí</a></li>
                     </ul>    
                 </div>
-                
             </div>
         </nav>
     </div>

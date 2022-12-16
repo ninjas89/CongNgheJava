@@ -8,25 +8,30 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import tdtu.edu.un.WG26.Model.User;
 
-public class LoadUserDetail implements UserDetails{
-	
+public class LoadUserDetail implements UserDetails {
+
 	private User user;
-	
+
 	public LoadUserDetail(User user) {
 		super();
 		this.user = user;
 	}
-	
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-        String userRoles = user.getRole().getRole();
-        Collection<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(userRoles);
-        return authorities;
+		String userRoles = user.getRole().getRole();
+		Collection<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(userRoles);
+		return authorities;
 	}
+
 	public String getRole() {
 		return user.getRole().getRole();
 	}
+
+	public String getEmail() {
+		return user.getEmail();
+	}
+
 	@Override
 	public String getPassword() {
 		return user.getPassword();
@@ -60,5 +65,5 @@ public class LoadUserDetail implements UserDetails{
 		// TODO Auto-generated method stub
 		return true;
 	}
-	
+
 }
