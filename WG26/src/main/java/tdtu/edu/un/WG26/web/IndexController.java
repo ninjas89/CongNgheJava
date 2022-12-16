@@ -211,7 +211,7 @@ public class IndexController {
 			String username = userDetail.getUsername();
 			model.addAttribute("username", username);
 		} else if (userDetail == null && pid == 1) {
-			return "redirect:/movies?pid=0";
+			return "redirect:/about?pid=0";
 		}
 		return "about";
 	}
