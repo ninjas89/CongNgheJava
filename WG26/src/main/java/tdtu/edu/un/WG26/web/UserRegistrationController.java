@@ -13,11 +13,11 @@ import tdtu.edu.un.WG26.web.dto.UserRegistrationDto;
 
 @Controller
 @RequestMapping("register")
-public class UserRegistratronController {
+public class UserRegistrationController {
 	@Autowired
 	private UserServices userServices;
 
-	public UserRegistratronController(UserServices userServices) {
+	public UserRegistrationController(UserServices userServices) {
 		super(); 
 		this.userServices = userServices; 
 	} 
