@@ -16,67 +16,74 @@
 
 <body class="userform m-5">
 
-    <div class="container" th:each="app : ${appInfo}">
-        <div class="row gutters">
-            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 p-3" >
-                <div class="card h-100 ">
-                    <div class="card-body ">
-                        <div class="account-settings ">
-                            <div class="user-profile mt-5">
-                                <div class="user-avatar">
-                                    <img th:src="${app.avatarPath}" alt="avatar" class="
-                                    d-block appimg m-auto">
-                                </div>
-                            </div>
+   <body class="userform m-5">
 
+    <div class="container" th:each="app : ${appInfo}">
+        <form method="POST" th:action="@{/home/add-to-cart(pid=${pid},id=${app.appName})}"  th:object="${cart}">
+            <div class="row gutters">
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 p-3" >
+                    <div class="card h-100 ">
+                        <div class="card-body ">
+                            <div class="account-settings ">
+                                <div class="user-profile mt-5">
+                                    <div class="user-avatar">
+                                        <img th:src="${app.avatarPath}" alt="avatar" class="
+                                        d-block appimg m-auto">
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <div class="row gutters">
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <h6 class=" titleuserform">Thông tin ứng dụng</h6>
-                            </div>
+                <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="row gutters">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <h6 class=" titleuserform">Thông tin ứng dụng</h6>
+                                </div>
 
-                            <div class="col-12">
-                                <div class="form-group mt-5 ">
-                                    <h1 th:text="${app.appName}"></h1>
+                                <div class="col-12">
+                                    <div class="form-group mt-5 text-center">
+                                        <h1 th:text="${app.appName}"></h1>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <h3>Thể loại: <span th:text="${app.genre}"></span></h3>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <h3><span th:text="${app.tagName}"></span></h3>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <h3>Mô tả : </h3>
+                                        <div class="form-group description">
+                                            <p th:text="${app.description}"></p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <h3>Mô tả : </h3>
-                                    <div class="form-group description">
-                                        <p th:text="${app.description}"></p>
+                            <h3 th:if="${param.error}" class="text-center text-danger">Ứng dụng đã tồn tại trong danh sách mong muốn</h3>
+                            <h3 th:if="${param.success}" class="text-center text-success">Ứng dụng đã được thêm vào danh sách mong muốn</h3>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="text-right">
+                                    	<a th:href="@{/home(pid=${pid})}" class="btn btn-primary">Quay lại</a>
+                                        <button type="submit" id="cart" name="addCart" class="btn btn-primary" th:if="${param.pid[0]} == 1" >Thêm Giỏ Hàng</button>
+                                        <a type="submit" id="download" name="download" th:href="@{${app.downloadPath}}" class="btn btn-primary" download th:if="${param.pid[0]} != 0" >Tải xuống</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row gutters">
-
-
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <h3>Giá tiền: <span th:text="${app.price}" class="description"></span> <span class="description"> VND</span></h3>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="row">
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <div class="text-right">
-                                    <button type="button" id="thanhtoan" class="btn btn-primary mr-5 pay">Thêm Giỏ Hàng</button>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </body>
 

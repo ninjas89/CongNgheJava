@@ -25,26 +25,19 @@
             <div class="form-row">
                 <div class="col">
                     <div class="form-group">
-                        <input type="text" th:text="${app} ? app.appName : ''" class="form-control" placeholder="Tên ứng dụng" id="nameapp" name="appName">
+                        <input type="text" class="form-control" placeholder="Tên ứng dụng" id="nameapp" name="appName" required>
                     </div>
                 </div>
             </div>
             
-            <div class="form-row">
-                <div class="col">
-                    <div class="form-group">
-                        <input type="text" th:text="${app} ? app.publisher : ''" class="form-control" placeholder="Tên nhà phát hành" id="publisher" name="publisher">
-                    </div>
-                </div>
-            </div>
             
             <div class="form-row">
                 <div class="col">
                     <div class="form-group">
                         <div class="gender">
-                            <select id="category" name="genre" class="form-control">
+                            <select id="category" name="genre" class="form-control" required>
                                 <div th:if="${app}">
-                                    <option th:value="${app.genre}" name='LOAI'></option>
+                                    <option th:value="${app.genre}" name='LOAI'> Loại</option>
                                 </div>
                                 <option label="Giải trí" value="game" name='LOAI' >Giải trí</option>
                                 <option label="Xem phim" value="phim" name='LOAI' >Xem phim</option>
@@ -58,7 +51,7 @@
             <div class="form-row">
                 <div class="col">
                     <div class="form-group">
-                        <input type="text" th:text="${app} ? app.tagName : ''" class="form-control" placeholder="Thể loại" id="theloai" name="tagName">
+                        <input type="text" class="form-control" placeholder="Thể loại" id="theloai" name="tagName" required>
                     </div>
                 </div>
             </div>
@@ -66,34 +59,29 @@
             <div class="form-row">
                 <div class="col">
                     <div class="form-group">
-                        <input type="text" th:text="${app} ? app.description : ''" class="form-control appdescription" placeholder="Mô tả" id="description" name="description">
-                    </div>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="col">
-                    <div class="form-group">
-                        <input type="text" th:text="${app} ? app.price : ''" class="form-control" placeholder="Giá thành" id="price" name="price">
+                        <input type="text"  class="form-control appdescription" placeholder="Mô tả" id="description" name="description" required>
                     </div>
                 </div>
             </div>
 			<div class="form-row">
 				<div class="col">
-					<div class="form-group ">
-					<p>File hình ảnh sản phẩm: </p>
+					<div class="form-group " required>
+					<p>File hình ảnh: </p>
 						<input type="file" name="avatarPath">
 					</div>
 				</div>
 			</div>
 			<div class="form-row">
                 <div class="col">
-                    <div class="form-group ">
-                    	<p>File zip sản phẩm: </p>
+                    <div class="form-group " required>
+                    	<p>File sản phẩm: </p>
                         <input type="file" name="downloadPath">
                     </div>
                     <div class=" form-row">
                         <div class="col">
                             <div class="form-group text-center">
+   	                            <h3 th:if="${param.success}" class="text-center text-success">Thêm ứng dụng thành công</h3>
+                            	<a th:href="@{/home(pid=2)}" class="btn btn-primary">Quay lại</a>
                                 <button type="submit" class="btn btn-primary font-weight-bolder  w-50 ">Upload</button>
                             </div>
                         </div>

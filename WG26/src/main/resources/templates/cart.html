@@ -21,76 +21,37 @@
         </div>
     </div>
 
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="home.html">Trang chủ</a></li>
-                    <li><a href="contact.html">Liên hệ</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right" th:if="${param.pid[0]} == 1">
-                	<li><a th:href="@{/home/cart(pid=${pid})}"><span class="glyphicon glyphicon-shopping-cart"></span> Giỏ hàng</a></li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span th:text="${username}"></span> <span class="caret"></span></a>
-                        <ul class="dropdown-menu" aria-labelledby="about-us">
-                            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Thông Tin Cá Nhân</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-list-alt"></span> Ứng Dụng Đã Tải</a></li>
-                            <li class="divider"></li>
-                            <li class="text-center">
-                                <form method="post" th:action="@{/logout}">
-                                    <button type="submit" class="btn btn-secondary">Đăng xuất</button>
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <div th:replace="fragments/header :: header">...</div>
     <!-- end header -->
 
         <!-- Block content - Đục lỗ trên giao diện bố cục chung, đặt tên là `content` -->
         <div class="container m-0">
                 <div class="col-12">
-                    <h1 class="text-center">Giỏ hàng</h1>
+                    <h1 class="text-center">Ứng dụng mong muốn</h1>
                 <div class="col-12">
                     <table class="table table-bordered">
-                        <thead>
+                        <thead class="text-center">
                             <tr>
                                 <th class="text-center"></th>
-                                <th class="text-center">STT</th>
-                                <th class="text-center">Ảnh đại diện</th>
                                 <th class="text-center">Tên sản phẩm</th>
-                                <th class="text-center">Số lượng</th>
-                                <th class="text-center">Đơn giá</th>
+                                <th class="text-center">Thể loại</th>
+                                <th class="text-center">Loại</th>
                                 <th class="text-center">Hành động</th>
                             </tr>
                         </thead>
                         <tbody id="datarow">
-                            <tr>
-                                <td class="text-center">
+                            <tr th:each="item : ${items}">
+                                <td class="text-center col-1">
                                     <a id="delete_1" data-sp-ma="2" class="btn btn-danger btn-delete-sanpham">
-                                        <i class="fa fa-trash" aria-hidden="true"></i> 
+                                        <i class="glyphicon glyphicon-trash" aria-hidden="true"></i> 
                                     </a>
                                 </td>
-                                <td class="text-center">1</td>
-                                <td>
-                                    <img src="../assets/img/product/ipad4.png" class="hinhdaidien">
-                                </td>
-                                <td>Apple Ipad 4 Wifi 16GB</td>
-                                <td class="text-right">2</td>
-                                <td class="text-right">11,800,000.00</td>
+                                <td class="text-center" th:utext="${item.appName}"></td>
+                                <td class="text-center" th:utext="${item.genre}"></td>
+                                <td class="text-center" th:utext="${item.tagName}"></td>
                                 <td class="text-center">
-                                    <a id="delete_1" data-sp-ma="2" class="btn btn-danger btn-delete-sanpham">
-                                        <i class="glyphicon glyphicon-download-alt" aria-hidden="true"></i> Thanh Toán
+                                    <a  th:href="@{${item.downloadPath}}" id="delete_1" data-sp-ma="2" class="btn btn-danger btn-delete-sanpham">
+                                        <i class="" aria-hidden="true"></i> Thanh Toán
                                     </a>
                                 </td>
                             </tr>

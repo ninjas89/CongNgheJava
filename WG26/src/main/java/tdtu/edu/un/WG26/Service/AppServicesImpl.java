@@ -31,9 +31,6 @@ public class AppServicesImpl implements AppServices{
 				appDto.getTagName(),
 				appDto.getAppName(),
 				appDto.getDescription(),
-				appDto.getPrice(),
-				appDto.getPublisher(),
-				appDto.getPurchaseTime(),
 				appDto.getDownloadPath(),
 				appDto.getAvatarPath());
 

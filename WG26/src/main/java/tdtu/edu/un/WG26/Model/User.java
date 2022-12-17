@@ -61,10 +61,6 @@ public class User {
         inverseJoinColumns = { @JoinColumn(name = "role_id", referencedColumnName = "id") }
 	)
 	private Role role;
-	
-	@ManyToMany(mappedBy = "userChooseLists",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-	private List<App> apps = new ArrayList<>();
-
 
 	public User() {
 		super();
@@ -170,20 +166,11 @@ public class User {
 		this.avatarPath = avatarPath;
 	}
 
-	
-	public List<App> getApps() {
-		return apps;
-	}
-
-	public void setApps(List<App> apps) {
-		this.apps = apps;
-	}
-
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", lastName=" + lastName + ", firstName=" + firstName
 				+ ", createdDate=" + createdDate + ", gender=" + gender + ", cashAmount=" + cashAmount + ", password="
 				+ password + ", phoneNumber=" + phoneNumber + ", avatarPath=" + avatarPath + ", role=" + role
-				+ ", apps=" + apps + "]";
+				+ "]";
 	}
 }

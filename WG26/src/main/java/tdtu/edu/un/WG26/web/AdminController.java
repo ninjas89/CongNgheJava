@@ -55,22 +55,33 @@ public class AdminController {
 
 	@GetMapping("admin/get-all-user")
 	public String getAllUser(@AuthenticationPrincipal LoadUserDetail userDetail, Model model, @RequestParam("pid") Integer pid) {
+		if (userDetail == null) {
+			return "redirect:/home?pid=0";
+		}
 		List<User> userList = adminServices.fetchAllUser();
+		model.addAttribute("userName",userDetail.getUsername());
 		model.addAttribute("userList", userList);
 		model.addAttribute("pid", pid);
 		return "admin";
 	}
 
 	@PostMapping("admin/delete-user")
-	public String deleteUser(@RequestParam("id") Long id, Model model, @RequestParam("pid") Integer pid) {
+	public String deleteUser(@AuthenticationPrincipal LoadUserDetail userDetail,@RequestParam("id") Long id, Model model, @RequestParam("pid") Integer pid) {
+		if (userDetail == null) {
+			return "redirect:/home?pid=0";
+		}
 		userServices.deleteUserById(id);
 		model.addAttribute("pid", pid);
-		return "redirect:/admin/get-all-user";
+		return "redirect:/admin/get-all-user?pid="+pid;
 	}
 	
 	@GetMapping("admin/get-all-app")
-	public String getAllApp(Model model, @RequestParam("pid") Integer pid) {
+	public String getAllApp(@AuthenticationPrincipal LoadUserDetail userDetail,Model model, @RequestParam("pid") Integer pid) {
+		if (userDetail == null) {
+			return "redirect:/home?pid=0";
+		}
 		List<App> appList = appServices.fetchAppList();
+		model.addAttribute("userName",userDetail.getUsername());
 		model.addAttribute("appList", appList);
 		model.addAttribute("pid", pid);
 		return "admin";
@@ -82,46 +93,59 @@ public class AdminController {
 	}
 
 	@PostMapping("admin/add-app")
-	public String postApp(@RequestParam("genre") String genre,
+	public String postApp(@AuthenticationPrincipal LoadUserDetail userDetail, 
+						@RequestParam("genre") String genre,
 						@RequestParam("tagName") String tagName,
 						@RequestParam("appName") String appName,
 						@RequestParam("description") String description,
-						@RequestParam("price") Integer price,
-						@RequestParam("publisher") String publisher,
 						@RequestParam("downloadPath") MultipartFile downloadPath,
 						@RequestParam("avatarPath") MultipartFile avatarPath) throws IOException {
 		
 		Path staticPath = Paths.get("src/main/resources/static");
         Path imagePath = Paths.get("img/upload");
         
+        Path filePath = Paths.get("file");
+        
         if (!Files.exists(CURRENT_FOLDER.resolve(staticPath).resolve(imagePath))) {
             Files.createDirectories(CURRENT_FOLDER.resolve(staticPath).resolve(imagePath));
         }
+        if(!Files.exists(CURRENT_FOLDER.resolve(staticPath).resolve(filePath))) {
+            Files.createDirectories(CURRENT_FOLDER.resolve(staticPath).resolve(filePath));
+        }
         
-        Path file = CURRENT_FOLDER.resolve(staticPath).resolve(imagePath).resolve(avatarPath.getOriginalFilename());
+        Path image = CURRENT_FOLDER.resolve(staticPath).resolve(imagePath).resolve(avatarPath.getOriginalFilename());
         
-        try (OutputStream os = Files.newOutputStream(file)) {
-            os.write(avatarPath.getBytes());
+        Path file = CURRENT_FOLDER.resolve(staticPath).resolve(filePath).resolve(downloadPath.getOriginalFilename());
+        
+        try (OutputStream osm = Files.newOutputStream(image)) {
+            osm.write(avatarPath.getBytes());
+        }
+        try (OutputStream osf = Files.newOutputStream(file)) {
+            osf.write(downloadPath.getBytes());
         }
     
-        AppDto appDto = new AppDto(genre, tagName, appName, description, price, publisher, 0, "", "/img/upload/" + avatarPath.getOriginalFilename());
+        AppDto appDto = new AppDto(genre, tagName, appName, description, "/file/" + downloadPath.getOriginalFilename(), "/img/upload/" + avatarPath.getOriginalFilename());
 		 
 		appServices.save(appDto);
 		
-		return "redirect:/admin/add-app";
+		return "redirect:/admin/add-app?success";
 	}
 
 	@PostMapping("admin/delete-app")
-	public String deleteApp(@RequestParam("id") Long id, Model model, @RequestParam("pid") Integer pid) {
+	public String deleteApp(@AuthenticationPrincipal LoadUserDetail userDetail, @RequestParam("id") Long id, Model model, @RequestParam("pid") Integer pid) {
 		appServices.deleteAppById(id);
 		model.addAttribute("pid", pid);
-		return "redirect:/admin/get-all-app" + pid;
+		return "redirect:/admin/get-all-app?pid=" + pid;
 	}
 	
 	@GetMapping("admin/get-all-card")
-	public String getAllCard(Model model, @RequestParam("pid") Integer pid) {
-		List<Card> appList = cardServices.fetchAllCard();
-		model.addAttribute("appList", appList);
+	public String getAllCard(@AuthenticationPrincipal LoadUserDetail userDetail, Model model, @RequestParam("pid") Integer pid) {
+		if (userDetail == null) {
+			return "redirect:/home?pid=0";
+		}
+		List<Card> cardList = cardServices.fetchAllCard();
+		model.addAttribute("userName",userDetail.getUsername());
+		model.addAttribute("cardList", cardList);
 		model.addAttribute("pid", pid);
 		return "admin";
 	}

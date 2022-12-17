@@ -11,8 +11,6 @@ public class UserChangePassDTO {
 	@Autowired
 	LoadUserDetail userDetail;
 	
-	@NotBlank(message = "Vui lòng nhập mật khẩu cũ")
-	private String currentPassword;
 	@NotBlank(message = "Vui lòng nhập mật khẩu mới")
 	private String newPassword;
 	
@@ -28,18 +26,10 @@ public class UserChangePassDTO {
 	public UserChangePassDTO(@NotEmpty(message = "Vui lòng nhập mật khẩu cũ") String currentPassword,
 			@NotEmpty(message = "Vui lòng nhập mật khẩu mới") String newPassword, String confirmNewPassword) {
 		super();
-		this.currentPassword = currentPassword;
 		this.newPassword = newPassword;
 		this.confirmNewPassword = confirmNewPassword;
 	}
 
-	public String getCurrentPassword() {
-		return currentPassword;
-	}
-
-	public void setCurrentPassword(String currentPassword) {
-		this.currentPassword = currentPassword;
-	}
 
 	public String getNewPassword() {
 		return newPassword;
@@ -66,7 +56,7 @@ public class UserChangePassDTO {
 
 	@Override
 	public String toString() {
-		return "UserChangePassDTO [currentPassword=" + currentPassword + ", newPassword=" + newPassword
+		return "UserChangePassDTO ["+ "newPassword=" + newPassword
 				+ ", confirmNewPassword=" + confirmNewPassword + ", email= "+email+"]";
 	}
 	

@@ -31,6 +31,7 @@ public class SecurityConfig {
 		http
 			.authorizeRequests().antMatchers( "/js/**",
 	                "/css/**",
+	                "/file**",
 	                "/img/**",
 					"/register**",
 					"/home**",

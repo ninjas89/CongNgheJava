@@ -6,9 +6,6 @@ public class AppDto {
 	private String tagName;	
 	private String appName;
 	private String description;
-	private Integer price;
-	private String publisher;
-	private Integer purchaseTime;
 	private String downloadPath;
 	private String avatarPath;
 	
@@ -16,16 +13,12 @@ public class AppDto {
 		super();
 	}
 	
-	public AppDto(String genre, String tagName, String appName, String description, Integer price,
-			String publisher, Integer purchaseTime, String downloadPath, String avatarPath) {
+	public AppDto(String genre, String tagName, String appName, String description, String downloadPath, String avatarPath) {
 		super();
 		this.genre = genre;
 		this.tagName = tagName;
 		this.appName = appName;
 		this.description = description;
-		this.price = price;
-		this.publisher = publisher;
-		this.purchaseTime = purchaseTime;
 		this.downloadPath = downloadPath;
 		this.avatarPath = avatarPath;
 	}
@@ -54,24 +47,6 @@ public class AppDto {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Integer getPrice() {
-		return price;
-	}
-	public void setPrice(Integer price) {
-		this.price = price;
-	}
-	public String getPublisher() {
-		return publisher;
-	}
-	public void setPublisher(String publisher) {
-		this.publisher = publisher;
-	}
-	public Integer getPurchaseTime() {
-		return purchaseTime;
-	}
-	public void setPurchaseTime(Integer purchaseTime) {
-		this.purchaseTime = purchaseTime;
-	}
 	public String getDownloadPath() {
 		return downloadPath;
 	}
@@ -88,8 +63,7 @@ public class AppDto {
 	@Override
 	public String toString() {
 		return "AppDto [genre=" + genre + ", tagName=" + tagName + ", appName=" + appName
-				+ ", description=" + description + ", price=" + price + ", publisher=" + publisher + ", purchaseTime="
-				+ purchaseTime + ", downloadPath=" + downloadPath + ", avatarPath=" + avatarPath + "]";
+				+ ", description=" + description + ", downloadPath=" + downloadPath + ", avatarPath=" + avatarPath + "]";
 	}
 	
 }

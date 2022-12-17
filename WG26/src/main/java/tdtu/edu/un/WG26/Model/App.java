@@ -35,43 +35,24 @@ public class App {
 	@Column
 	private String description;
 	
-	@Column
-	private Integer price;
-	
-	@Column
-	private String publisher;
-	
-	@Column(name = "purchase_time")
-	private Integer purchaseTime;
-	
 	@Column(name="download_path")
 	private String downloadPath;
 	
 	@Column(name="avatar_path")
 	private String avatarPath;
 	
-	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-	@JoinTable(
-		name = "basket",
-        joinColumns = { @JoinColumn(name = "app_id", referencedColumnName = "id") },
-        inverseJoinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") }
-		)
-	private List<User> userChooseLists = new ArrayList<>();
-	
 	public App() {
 		super();
 	}
 	
-	public App(String genre, String tagName, String appName, String description, Integer price,
-			String publisher, Integer purchaseTime, String downloadPath, String avatarPath) {
+	
+	public App(String genre, String tagName, String appName, String description,
+		String downloadPath, String avatarPath) {
 		super();
 		this.genre = genre;
 		this.tagName = tagName;
 		this.appName = appName;
 		this.description = description;
-		this.price = price;
-		this.publisher = publisher;
-		this.purchaseTime = purchaseTime;
 		this.downloadPath = downloadPath;
 		this.avatarPath = avatarPath;
 	}
@@ -116,30 +97,6 @@ public class App {
 		this.description = description;
 	}
 
-	public Integer getPrice() {
-		return price;
-	}
-
-	public void setPrice(Integer price) {
-		this.price = price;
-	}
-
-	public String getPublisher() {
-		return publisher;
-	}
-
-	public void setPublisher(String publisher) {
-		this.publisher = publisher;
-	}
-
-	public Integer getPurchaseTime() {
-		return purchaseTime;
-	}
-
-	public void setPurchaseTime(Integer purchaseTime) {
-		this.purchaseTime = purchaseTime;
-	}
-
 	public String getDownloadPath() {
 		return downloadPath;
 	}
@@ -159,8 +116,7 @@ public class App {
 	@Override
 	public String toString() {
 		return "App [id=" + id + ", genre=" + genre + ", tagName=" + tagName + ", appName=" + appName + ", description="
-				+ description + ", price=" + price + ", publisher=" + publisher + ", purchaseTime=" + purchaseTime
-				+ ", downloadPath=" + downloadPath + ", avatarPath=" + avatarPath + "]";
+				+ description + ", downloadPath=" + downloadPath + ", avatarPath=" + avatarPath + "]";
 	}
 }
 	
