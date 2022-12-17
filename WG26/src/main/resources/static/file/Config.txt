@@ -1,0 +1,66 @@
+MONGO:
+	"bin" folder: C:\Program Files\MongoDB\Server\5.0\bin
+	Mongodb's database: C:\New-backup\MongoDB-Data
+
+	Connect command: mongod --dbpath "C:\New-backup\MongoDB-Data"
+
+LOGIN AUTHENTICATION:
+{
+  "email": "elitedental@wisere.com",
+  "password": "100Clients@2022",
+  "source": "WEB",
+  "browser": "Chrome 92",
+  "os": "Windows",
+  "device": "UNKNOWN"
+}
+
+{
+  "email": "duc121026ab@gmail.com",
+  "password": "duc@1234",
+  "source": "WEB",
+  "browser": "Chrome 92",
+  "os": "Windows",
+  "device": "UNKNOWN"
+}
+
+{
+  "email": "thanh.din@unibiz.io",
+  "password": "Thanh@1987",
+  "source": "WEB",
+  "browser": "Chrome 92",
+  "os": "Windows",
+  "device": "UNKNOWN"
+}
+
+2022-02-25T00:00:00.000Z
+2022-03-04T23:59:59.000Z
+
+0917121293
+
+GIT'S STEP:
+git fetch -f origin feature/backend-ws-marketplace-8000-test:devup
+git stash save
+git rebase devup
+git stash pop
+...
+git push -f origin quan_dev:quan_dev
+
+{
+    "email": "kingslyt36@gmail.com",
+    "name": "Nguyễn Đức Quân",
+    "phone": "0918683068",
+    "birthDate": "03-06-2001",
+    "address": "79 Phú Định",
+    "idCardFront": "85eq-357b
+bd76-gbi5
+e6d3-0wfq
+mziq-64hr
+ovls-y9j2
+rza3-wd3t
+v3eo-3n19
+zf79-d00p
+zhm5-i7ex
+zkgs-bmnw",
+    "idCardBack": "horn cost column jelly adjust tunnel patrol benefit flock sibling chef target
+"
+}

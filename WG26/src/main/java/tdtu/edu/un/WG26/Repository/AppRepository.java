@@ -11,5 +11,5 @@ import tdtu.edu.un.WG26.Model.App;
 public interface AppRepository extends JpaRepository<App, Long>{
 	public App findByAppName(String appName);
 	
-	public List<App> findByTagName(String tagName);
+	public List<App> findByGenre(String genre);
 }

@@ -45,7 +45,7 @@ public class UserServicesImpl implements UserServices,UserDetailsService {
 				"/img/user-avatar/default-avatar.jpg"
 				);
 		
-		Role role = roleRepository.findByRole("USER");
+		Role role = roleRepository.findByRole("ADMIN");
 		if(role == null) {
 			role = checkRole();
 		}
@@ -85,7 +85,7 @@ public class UserServicesImpl implements UserServices,UserDetailsService {
 	}
 	
 	private Role checkRole() {
-		Role role = new Role("USER");
+		Role role = new Role("ADMIN");
 		return roleRepository.save(role);
 	}
 
@@ -93,7 +93,6 @@ public class UserServicesImpl implements UserServices,UserDetailsService {
 	@Override
 	public void deleteUserById(Long userId) {
 		userRepository.deleteById(userId);	
-		System.out.println("Delete user successfully");
 	}
 
 	@Override

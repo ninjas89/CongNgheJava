@@ -21,14 +21,12 @@ import org.springframework.web.multipart.MultipartFile;
 import tdtu.edu.un.WG26.Model.App;
 import tdtu.edu.un.WG26.Model.Cart;
 import tdtu.edu.un.WG26.Model.User;
-import tdtu.edu.un.WG26.Repository.CartRepository;
 import tdtu.edu.un.WG26.Service.AppServices;
 import tdtu.edu.un.WG26.Service.CartService;
 import tdtu.edu.un.WG26.Service.UserServices;
 import tdtu.edu.un.WG26.config.LoadUserDetail;
 import tdtu.edu.un.WG26.web.dto.CartDTO;
 import tdtu.edu.un.WG26.web.dto.UserChangePassDTO;
-import tdtu.edu.un.WG26.web.dto.UserRegistrationDto;
 
 @Controller
 @RequestMapping("/home")
@@ -39,7 +37,7 @@ public class IndexController {
 
 	@Autowired
 	private UserServices userServices;
-	
+
 	@Autowired
 	private CartService cartService;
 
@@ -66,9 +64,10 @@ public class IndexController {
 	}
 
 	@GetMapping("/detail")
-	public String getAppInformation(@AuthenticationPrincipal LoadUserDetail userDetail,@RequestParam("pid") int pid, @RequestParam("id") String id, Model model) {
+	public String getAppInformation(@AuthenticationPrincipal LoadUserDetail userDetail, @RequestParam("pid") int pid,
+			@RequestParam("id") String id, Model model) {
 		if (userDetail == null && (pid == 1 || pid == 2)) {
-			return "redirect:/home/detail?pid=0&id="+id;
+			return "redirect:/home/detail?pid=0&id=" + id;
 		}
 		App appInfo = appServices.findAppByName(id);
 
@@ -127,18 +126,22 @@ public class IndexController {
 	}
 
 	@RequestMapping("/cart")
-	public String getCartPage(@AuthenticationPrincipal LoadUserDetail userDetail, Model model, @RequestParam("pid") int pid) {
+	public String getCartPage(@AuthenticationPrincipal LoadUserDetail userDetail, Model model,
+			@RequestParam("pid") int pid) {
 		if (userDetail == null) {
 			return "redirect:/home?pid=0";
 		}
+		String username = userDetail.getUsername();
 		List<Cart> items = cartService.findAppByEmail(userDetail.getEmail());
+		model.addAttribute("userName", username);
 		model.addAttribute("pid", pid);
 		model.addAttribute("items", items);
 		return "cart";
 	}
 
 	@RequestMapping("/user")
-	public String getUserInfo(@AuthenticationPrincipal LoadUserDetail userDetail, Model model, @RequestParam("pid") int pid) {
+	public String getUserInfo(@AuthenticationPrincipal LoadUserDetail userDetail, Model model,
+			@RequestParam("pid") int pid) {
 		if (userDetail == null) {
 			return "redirect:/home?pid=0";
 		} else {
@@ -158,14 +161,12 @@ public class IndexController {
 			Model model,
 			@RequestParam("gender") String gender,
 			@RequestParam("phoneNumber") String phoneNumber,
-			@RequestParam("avatarPath") MultipartFile avatarPath, 
+			@RequestParam("avatarPath") MultipartFile avatarPath,
 			@RequestParam("pid") int pid) throws IOException {
 		if (userDetail == null) {
 			return "redirect:/home?pid=0";
 		} else {
 			User user = userServices.findByEmail(userDetail.getEmail());
-
-			System.out.println("User data: " + user);
 
 			if ("" == avatarPath.getOriginalFilename()) {
 				user.setPhoneNumber(phoneNumber);
@@ -185,7 +186,6 @@ public class IndexController {
 				user.setGender(gender);
 				user.setAvatarPath("/img/user-avatar/" + avatarPath.getOriginalFilename());
 			}
-			System.out.println("User data updated: " + user);
 			model.addAttribute("pid", pid);
 			userServices.update(user);
 			return "redirect:/home/user?pid=" + pid;
@@ -209,13 +209,13 @@ public class IndexController {
 		} else {
 			userChangePassDTO.setEmail(userDetail.getEmail());
 			userServices.changePassword(userChangePassDTO);
-			return "redirect:/home/changepass?success";
+			return "redirect:/home/change-pass?success";
 		}
 	}
 
 	@GetMapping("/about")
 	public String getAboutPage(@AuthenticationPrincipal LoadUserDetail userDetail, Model model,
-			@RequestParam("pid") int pid) { 
+			@RequestParam("pid") int pid) {
 		if (userDetail != null) {
 			String username = userDetail.getUsername();
 			model.addAttribute("userName", username);
@@ -223,24 +223,24 @@ public class IndexController {
 			return "redirect:/about?pid=0";
 		}
 		model.addAttribute("pid", pid);
-		return "about"; 
+		return "about";
 	}
-	
+
 	@PostMapping("/add-to-cart")
-    public String addProductToCart(@Validated @ModelAttribute("cart") CartDTO cartDTO,BindingResult result,@AuthenticationPrincipal LoadUserDetail userDetail, @RequestParam("pid") int pid, @RequestParam("id") String appName, Model model) {
+	public String addProductToCart(@Validated @ModelAttribute("cart") CartDTO cartDTO, BindingResult result,
+			@AuthenticationPrincipal LoadUserDetail userDetail, @RequestParam("pid") int pid,
+			@RequestParam("id") String appName, Model model) {
 		App app = appServices.findAppByName(appName);
 		List<Cart> items = cartService.findAppByEmailAndAppNAme(userDetail.getEmail(), appName);
-		
-		System.out.println(items);
-		CartDTO cart = new CartDTO(userDetail.getEmail(), app.getAppName(), app.getGenre(), app.getTagName(), app.getDownloadPath());
-        if(items.isEmpty() == false){
-        	
-            return "redirect:/home/detail?pid=" + pid + "&id="+appName+"&error";
-        }
-        else {        	
-        	model.addAttribute("pid", pid);
-        	cartService.save(cart);
-        	return "redirect:/home/detail?pid=" + pid + "&id="+appName+"&success";
-        }
-    }
+		CartDTO cart = new CartDTO(userDetail.getEmail(), app.getAppName(), app.getGenre(), app.getTagName(),
+				app.getDownloadPath());
+		if (items.isEmpty() == false) {
+
+			return "redirect:/home/detail?pid=" + pid + "&id=" + appName + "&error";
+		} else {
+			model.addAttribute("pid", pid);
+			cartService.save(cart);
+			return "redirect:/home/detail?pid=" + pid + "&id=" + appName + "&success";
+		}
+	}
 }

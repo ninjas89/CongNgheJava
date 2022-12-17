@@ -18,30 +18,28 @@ public class UserRegistrationController {
 	private UserServices userServices;
 
 	public UserRegistrationController(UserServices userServices) {
-		super(); 
-		this.userServices = userServices; 
-	} 
-	
+		super();
+		this.userServices = userServices;
+	}
+
 	@ModelAttribute("user")
 	public UserRegistrationDto userRegistrationDto() {
 		return new UserRegistrationDto();
 	}
-	
+
 	@RequestMapping("")
 	public String getRegister() {
 		return "register";
 	}
-	
+
 	@PostMapping("")
-	public String postRegister(@Validated @ModelAttribute("user") UserRegistrationDto registrationDto, BindingResult result) {
-        if(result.hasErrors()){
-        	System.out.println(result.getAllErrors());
-        	System.out.println(result.getGlobalErrorCount());
-            return "register";
-        }
-		else {
+	public String postRegister(@Validated @ModelAttribute("user") UserRegistrationDto registrationDto,
+			BindingResult result) {
+		if (result.hasErrors()) {
+			return "register";
+		} else {
 			userServices.save(registrationDto);
-			return "redirect:/register?success";			
+			return "redirect:/register?success";
 		}
 	}
 }

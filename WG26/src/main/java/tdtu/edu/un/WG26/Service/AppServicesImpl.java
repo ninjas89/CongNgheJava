@@ -45,7 +45,7 @@ public class AppServicesImpl implements AppServices{
 
 	@Override
 	public List<App> fetchAppEntertainmentList(String tagName) {
-		List<App> apps = appRepository.findByTagName(tagName);
+		List<App> apps = appRepository.findByGenre(tagName);
 		
 		return apps;
 	}
@@ -53,7 +53,6 @@ public class AppServicesImpl implements AppServices{
 	@Override
 	public void deleteAppById(Long appId) {
 		appRepository.deleteById(appId);
-		System.out.println("Delete app successfully");
 	}
 
 	@Override

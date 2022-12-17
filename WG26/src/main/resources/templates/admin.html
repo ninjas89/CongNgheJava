@@ -64,7 +64,6 @@
                                     <th scope="col" class="text-center">App Name</th>
                                     <th scope="col" class="text-center">Genre</th>
                                     <th scope="col" class="text-center">Tag</th>
-                                    <th scope="col" class="text-center">Price</th>
                                     <th scope="col" class="text-center">Actions</th>
                                 </tr>
                             </thead>
@@ -73,7 +72,6 @@
                                     <td th:utext="${app.appName}"></td>
                                     <td th:utext="${app.genre}"></td>
                                     <td th:utext="${app.tagName}"></td>
-                                    <td th:utext="${app.price}"></td>
                                     <td>
                                         <form th:action="@{/admin/delete-app?(pid=${pid},id=${app.id})}" method="post">
                                             <input type="submit" class="btn btn-danger" value="Xóa ứng dụng">                   

@@ -23,7 +23,7 @@ public class Cart {
 	@Column(name="tag_name")
 	private String tagName;
 	@Column(name="download_path")
-	private String downloadPath;
+	private String downloadPath; 
 	
 	public Cart() {
 		super();
@@ -71,6 +71,14 @@ public class Cart {
 
 	public void setTagName(String tagName) {
 		this.tagName = tagName;
+	}
+	
+	public String getDownloadPath() {
+		return downloadPath;
+	}
+
+	public void setDownloadPath(String downloadPath) {
+		this.downloadPath = downloadPath;
 	}
 
 	@Override
