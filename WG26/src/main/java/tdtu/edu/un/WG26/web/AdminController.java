@@ -8,11 +8,11 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,6 +24,7 @@ import tdtu.edu.un.WG26.Service.AdminServices;
 import tdtu.edu.un.WG26.Service.AppServices;
 import tdtu.edu.un.WG26.Service.CardServices;
 import tdtu.edu.un.WG26.Service.UserServices;
+import tdtu.edu.un.WG26.config.LoadUserDetail;
 import tdtu.edu.un.WG26.web.dto.AppDto;
 
 @Controller
@@ -53,23 +54,25 @@ public class AdminController {
 	}
 
 	@GetMapping("admin/get-all-user")
-	public String getAllUser(Model model) {
+	public String getAllUser(@AuthenticationPrincipal LoadUserDetail userDetail, Model model, @RequestParam("pid") Integer pid) {
 		List<User> userList = adminServices.fetchAllUser();
-		System.out.println(userList);
 		model.addAttribute("userList", userList);
+		model.addAttribute("pid", pid);
 		return "admin";
 	}
 
 	@PostMapping("admin/delete-user")
-	public String deleteUser(@RequestParam("id") Long id) {
+	public String deleteUser(@RequestParam("id") Long id, Model model, @RequestParam("pid") Integer pid) {
 		userServices.deleteUserById(id);
+		model.addAttribute("pid", pid);
 		return "redirect:/admin/get-all-user";
 	}
 	
 	@GetMapping("admin/get-all-app")
-	public String getAllApp(Model model) {
+	public String getAllApp(Model model, @RequestParam("pid") Integer pid) {
 		List<App> appList = appServices.fetchAppList();
 		model.addAttribute("appList", appList);
+		model.addAttribute("pid", pid);
 		return "admin";
 	}
 
@@ -108,24 +111,18 @@ public class AdminController {
 		return "redirect:/admin/add-app";
 	}
 
-	@GetMapping("admin/edit-app")
-	public String editAppById(@PathVariable("id") Long id, Model model) {
-		System.out.println(id);
-		App app = appServices.findAppById(id);
-		model.addAttribute("app", app);
-		return "addapp";
-	}
-
 	@PostMapping("admin/delete-app")
-	public String deleteApp(@RequestParam("id") Long id) {
+	public String deleteApp(@RequestParam("id") Long id, Model model, @RequestParam("pid") Integer pid) {
 		appServices.deleteAppById(id);
-		return "redirect:/admin/get-all-app";
+		model.addAttribute("pid", pid);
+		return "redirect:/admin/get-all-app" + pid;
 	}
 	
 	@GetMapping("admin/get-all-card")
-	public String getAllCard(Model model) {
+	public String getAllCard(Model model, @RequestParam("pid") Integer pid) {
 		List<Card> appList = cardServices.fetchAllCard();
 		model.addAttribute("appList", appList);
+		model.addAttribute("pid", pid);
 		return "admin";
 	}
 }
