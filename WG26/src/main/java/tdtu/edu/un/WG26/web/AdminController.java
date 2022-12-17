@@ -55,6 +55,7 @@ public class AdminController {
 	@GetMapping("admin/get-all-user")
 	public String getAllUser(Model model) {
 		List<User> userList = adminServices.fetchAllUser();
+		System.out.println(userList);
 		model.addAttribute("userList", userList);
 		return "admin";
 	}

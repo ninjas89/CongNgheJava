@@ -30,6 +30,14 @@ public class Role {
 	@OneToMany(mappedBy = "role",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	private List<User> userList = new ArrayList<>();
 	
+	public Role() {
+		super();
+	}
+
+	public Role(String role) {
+		this.role = role;
+	}
+	
 	public Long getId() {
 		return id;
 	}

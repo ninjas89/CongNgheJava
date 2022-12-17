@@ -49,6 +49,7 @@ public class UserServicesImpl implements UserServices,UserDetailsService {
 		if(role == null) {
 			role = checkRole();
 		}
+
 		user.setRole(role);
 		return userRepository.save(user);
 	}
@@ -84,8 +85,7 @@ public class UserServicesImpl implements UserServices,UserDetailsService {
 	}
 	
 	private Role checkRole() {
-		Role role = new Role();
-		role.setRole("ADMIN");
+		Role role = new Role("USER");
 		return roleRepository.save(role);
 	}
 

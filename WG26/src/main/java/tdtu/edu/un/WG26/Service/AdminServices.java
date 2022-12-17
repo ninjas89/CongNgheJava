@@ -7,5 +7,4 @@ import tdtu.edu.un.WG26.Model.User;
 public interface AdminServices {
 
     List<User> fetchAllUser();
-    
 }
